@@ -1,0 +1,16 @@
+{
+  "name": "performance.js",
+  "version": "1.0.0",
+  "description": "Collection of performance profiles for varius JavaScript built-ins.",
+  "main": "performance.eval.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Performance",
+    "JavaScript",
+    "Built-Ins"
+  ],
+  "author": "HP Dietz <h.p.dietz@gmail.com>",
+  "license": "MIT"
+}
