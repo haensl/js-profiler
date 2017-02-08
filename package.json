@@ -14,6 +14,7 @@
   "author": "HP Dietz <h.p.dietz@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "glob": "^7.1.1"
+    "glob": "^7.1.1",
+    "node-getopt": "^0.2.3"
   }
 }
