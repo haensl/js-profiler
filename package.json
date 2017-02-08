@@ -12,5 +12,8 @@
     "Built-Ins"
   ],
   "author": "HP Dietz <h.p.dietz@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.1"
+  }
 }
