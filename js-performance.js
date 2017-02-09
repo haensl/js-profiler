@@ -8,7 +8,7 @@ const join = require('path').join;
 const GetOpt = require('node-getopt');
 const DEFAULTS = require(join(__appRoot, 'support/defaults'));
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
-const pf = require(join(__appRoot, 'performance/performance'));
+const clock = require(join(__appRoot, 'support/clock/clock'));
 
 const opts = new GetOpt([
   ['h', 'help', 'Display this helptext.'],
@@ -70,7 +70,7 @@ while(numProfiles--) {
     let i = iterations;
     let sum = 0;
     while (i--) {
-      sum += pf.time(fn.f);
+      sum += clock.time(fn.f);
     }
 
     if (speak) {
