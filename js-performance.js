@@ -3,7 +3,7 @@
 
 global.__appRoot = __dirname;
 
-const fs = require('fs');
+const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
 const DEFAULTS = require(join(__appRoot, 'support/defaults'));
@@ -32,17 +32,14 @@ if ('verbose' in opts.options) {
   verbosity = VERBOSITY.VERBOSE;
 }
 
-let speak = verbosity > VERBOSITY.QUIET;
+const speak = verbosity > VERBOSITY.QUIET;
 
 let profiles = [];
 if (opts.argv.length > 0) {
   opts.argv.forEach((profileName) => {
-    if (fs.existsSync(join(__dirname, `profiles/${profileName}.js`))) {
-      profiles.push(require(join(__dirname, `profiles/${profileName}`)));
-    } else if (fs.existsSync(join(__dirname, `profiles/${profileName}.profile.js`))) {
-      profiles.push(require(join(__dirname, `profiles/${profileName}.profile.js`)));
-    } else if (fs.existsSync(join(__dirname, `profiles/${profileName}`))) {
-      profiles.push(require(join(__dirname, `profiles/${profileName}`)));
+    const discoveredProfiles = glob.sync(`profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
+    if (discoveredProfiles.length === 1) {
+      profiles.push(require(join(__appRoot, discoveredProfiles.pop())));
     } else if (speak){
       console.info(`Skipping unknown profile "${profileName}".`);
     }
