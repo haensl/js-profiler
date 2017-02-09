@@ -1,10 +1,12 @@
 {
-  "name": "performance.js",
-  "version": "1.0.0",
+  "name": "js-performance",
+  "version": "1.1.0",
   "description": "Collection of performance profiles for varius JavaScript built-ins.",
-  "main": "performance.eval.js",
+  "main": "js-performance.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node js-performance.js",
+    "test": "mocha spec.setup.js **/*.spec.js",
+    "tdd": "mocha --recursive --watch spec.setup.js **/*.spec.js"
   },
   "keywords": [
     "Performance",
@@ -16,5 +18,11 @@
   "dependencies": {
     "glob": "^7.1.1",
     "node-getopt": "^0.2.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
   }
 }

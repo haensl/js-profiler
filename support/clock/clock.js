@@ -1,17 +1,10 @@
 'use strict';
+const join = require('path').join
+const testdata = require(join(__appRoot, 'support/testdata'));
 
-const testdata = (() => {
-  let i = 1000000;
-  const data = [];
-  while(i--) {
-    data.push(i);
-  }
-  return data;
-})();
-
-const clock = (start) => {
-  if (typeof start === 'undefined') {
-    return process.hrtime();
+const delta = (start) => {
+  if (!Array.isArray(start)) {
+    throw new Error(`Invalid paramter: not an array! ${typeof start} ${start}`);
   }
 
   const end = process.hrtime(start);
@@ -27,12 +20,12 @@ const time = (f, d) => {
     d = testdata;
   }
 
-  const s = clock();
+  const s = process.hrtime();
   f(d);
-  return clock(s);
+  return delta(s);
 };
 
 module.exports = {
-  clock,
+  delta,
   time
 };

@@ -3,12 +3,12 @@
 
 global.__appRoot = __dirname;
 
-const fs = require('fs');
+const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
 const DEFAULTS = require(join(__appRoot, 'support/defaults'));
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
-const pf = require(join(__appRoot, 'performance/performance'));
+const clock = require(join(__appRoot, 'support/clock/clock'));
 
 const opts = new GetOpt([
   ['h', 'help', 'Display this helptext.'],
@@ -32,17 +32,14 @@ if ('verbose' in opts.options) {
   verbosity = VERBOSITY.VERBOSE;
 }
 
-let speak = verbosity > VERBOSITY.QUIET;
+const speak = verbosity > VERBOSITY.QUIET;
 
 let profiles = [];
 if (opts.argv.length > 0) {
   opts.argv.forEach((profileName) => {
-    if (fs.existsSync(join(__dirname, `profiles/${profileName}.js`))) {
-      profiles.push(require(join(__dirname, `profiles/${profileName}`)));
-    } else if (fs.existsSync(join(__dirname, `profiles/${profileName}.profile.js`))) {
-      profiles.push(require(join(__dirname, `profiles/${profileName}.profile.js`)));
-    } else if (fs.existsSync(join(__dirname, `profiles/${profileName}`))) {
-      profiles.push(require(join(__dirname, `profiles/${profileName}`)));
+    const discoveredProfiles = glob.sync(`profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
+    if (discoveredProfiles.length === 1) {
+      profiles.push(require(join(__appRoot, discoveredProfiles.pop())));
     } else if (speak){
       console.info(`Skipping unknown profile "${profileName}".`);
     }
@@ -70,7 +67,7 @@ while(numProfiles--) {
     let i = iterations;
     let sum = 0;
     while (i--) {
-      sum += pf.time(fn.f);
+      sum += clock.time(fn.f);
     }
 
     if (speak) {
