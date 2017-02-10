@@ -1,6 +1,6 @@
 {
   "name": "js-performance",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Collection of performance profiles for varius JavaScript built-ins.",
   "main": "js-performance.js",
   "scripts": {
