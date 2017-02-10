@@ -1,3 +1,6 @@
+### 1.3.0
+* Add command line option to specify magnitude of test data
+
 ### 1.2.0
 * Add recursion profile
 

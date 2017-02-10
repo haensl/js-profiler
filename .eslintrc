@@ -37,8 +37,7 @@
     "react/jsx-closing-bracket-location": ["error", { selfClosing: "after-props", nonEmpty: "after-props" }],
     "react/jsx-first-prop-new-line": ["error", "never"],
     "react/prop-types": ["error", { ignore: ["dispatch"] }],
-    "react/no-unused-prop-types": "off",
-    "jsx-a11y/no-static-element-interactions": "off"
+    "react/no-unused-prop-types": "off"
   },
   "settings": {
     "import/resolver": {
