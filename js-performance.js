@@ -9,11 +9,13 @@ const GetOpt = require('node-getopt');
 const DEFAULTS = require(join(__appRoot, 'support/defaults'));
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
 const clock = require(join(__appRoot, 'support/clock/clock'));
+const testdata = require(join(__appRoot, 'support/testdata/testdata'));
 
 const opts = new GetOpt([
   ['h', 'help', 'Display this helptext.'],
-  ['i', 'iterations=', 'Specify the number of iterations per profiled function.'],
+  ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
   ['q', 'quiet', 'Print results only.'],
+  ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
   ['v', 'verbose', 'Print verbose information.']
 ]).bindHelp()
 .parseSystem();
@@ -28,8 +30,17 @@ let verbosity = DEFAULTS.verbosity;
 if ('quiet' in opts.options) {
   verbosity = VERBOSITY.QUIET;
 }
+
 if ('verbose' in opts.options) {
   verbosity = VERBOSITY.VERBOSE;
+}
+
+let data;
+if ('magnitude' in opts.options
+   && !isNaN(parseInt(opts.options.magnitude, 10))) {
+  data = testdata(parseInt(opts.options.magnitude, 10));
+} else {
+  data = testdata();
 }
 
 const speak = verbosity > VERBOSITY.QUIET;
@@ -67,7 +78,7 @@ while(numProfiles--) {
     let i = iterations;
     let sum = 0;
     while (i--) {
-      sum += clock.time(fn.f);
+      sum += clock.time(fn.f, data);
     }
 
     if (speak) {
