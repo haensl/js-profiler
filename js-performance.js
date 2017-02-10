@@ -13,7 +13,7 @@ const testdata = require(join(__appRoot, 'support/testdata/testdata'));
 
 const opts = new GetOpt([
   ['h', 'help', 'Display this helptext.'],
-  ['i', 'iterations=', 'Specify the number of iterations per profiled function.'],
+  ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
   ['q', 'quiet', 'Print results only.'],
   ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
   ['v', 'verbose', 'Print verbose information.']
