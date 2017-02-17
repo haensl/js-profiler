@@ -11,18 +11,19 @@ const DEFAULTS = require(join(__appRoot, 'support/defaults'));
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
 const clock = require(join(__appRoot, 'support/clock/clock'));
 const testdata = require(join(__appRoot, 'support/testdata/testdata'));
+
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
     ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
     ['q', 'quiet', 'Print results only.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
     ['v', 'verbose', 'Print verbose information.']
-]).bindHelp()
+  ]).bindHelp()
   .parseSystem();
 
 let iterations = DEFAULTS.iterations;
-if ('iterations' in opts.options &&
-  !isNaN(parseInt(opts.options.iterations, 10))) {
+if ('iterations' in opts.options
+  && !isNaN(parseInt(opts.options.iterations, 10))) {
   iterations = parseInt(opts.options.iterations, 10);
 }
 
@@ -36,8 +37,8 @@ if ('verbose' in opts.options) {
 }
 
 let data;
-if ('magnitude' in opts.options &&
-  !isNaN(parseInt(opts.options.magnitude, 10))) {
+if ('magnitude' in opts.options
+  && !isNaN(parseInt(opts.options.magnitude, 10))) {
   data = testdata(parseInt(opts.options.magnitude, 10));
 } else {
   data = testdata();
@@ -61,8 +62,8 @@ if (opts.argv.length > 0) {
 
 if (speak) {
   console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.`);
-  if (iterations > 1 &&
-    verbosity > VERBOSITY.DEFAULT) {
+  if (iterations > 1
+    && verbosity > VERBOSITY.DEFAULT) {
     console.info(`Results are averaged over ${iterations} iterations per profiled function.\n`);
   }
 }
