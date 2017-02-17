@@ -5,16 +5,16 @@ const testdata = require(join(__appRoot, 'support/testdata/testdata'))();
 
 const delta = (start) => {
   if (!Array.isArray(start)) {
-    throw new Error(`Invalid paramter: not an array! ${typeof start} ${start}`);
+    throw new Error(`Invalid parameter: not an array! ${typeof start} ${start}`);
   }
 
   const end = process.hrtime(start);
-  return Math.round((end[0] * 1000) + (end[1] / 1000000));
+  return (end[0] * 1000) + (end[1] / 1000000);
 };
 
 const time = (f, d) => {
   if (typeof f !== 'function') {
-    throw new Error(`Invalid paramter: not a function! ${typeof f} ${f}`);
+    throw new Error(`Invalid parameter: not a function! ${typeof f} ${f}`);
   }
 
   if (typeof d === 'undefined') {
