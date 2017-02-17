@@ -1,9 +1,10 @@
 'use strict';
+
 const join = require('path').join;
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
 
 const loopForEach = {
-  description: (verbosity) => '[].forEach() => []',
+  description: () => '[].forEach() => []',
   f: (d) => {
     const r = [];
     d.forEach((dp) => r.push(dp < 5 && dp > 3));
@@ -46,7 +47,7 @@ const loopInverseWhile = {
     const r = [];
     let i = d.length;
     let dp;
-    while(i--) {
+    while (i--) {
       dp = d[i];
       r.push(dp < 5 && dp > 3);
     }

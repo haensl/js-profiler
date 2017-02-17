@@ -1,4 +1,5 @@
 'use strict';
+
 const join = require('path').join;
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
 

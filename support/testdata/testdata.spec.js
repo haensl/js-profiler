@@ -11,7 +11,7 @@ describe('testdata', () => {
     beforeEach(() => {
       data = testdata();
     });
-    
+
     it('should generate an array of test data', () => {
       expect(Array.isArray(data)).to.be.true;
     });

@@ -23,7 +23,7 @@ describe('Loops', () => {
 
       it('should return an array of booleans', () => {
         result.forEach((val) => {
-          expect(typeof val).to.eql('boolean');
+          expect(val).to.be.a('boolean');
         });
       });
 

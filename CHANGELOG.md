@@ -1,3 +1,6 @@
+### 1.3.1
+* #21: Cleanup eslint
+
 ### 1.3.0
 * Add command line option to specify magnitude of test data
 
