@@ -1,9 +1,10 @@
 'use strict';
+
 const join = require('path').join;
 const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
 
 const recursiveSum = {
-  description: (verbosity) => 'recursive sum',
+  description: () => 'recursive sum',
   f: (d) => {
     if (d.length === 0) {
       return 0;
@@ -14,10 +15,10 @@ const recursiveSum = {
 };
 
 const tailRecursiveSum = {
-  description: (verbosity) => 'tail recursive sum',
+  description: () => 'tail recursive sum',
   f: (d, i) => {
     if (typeof i === 'undefined') {
-      i = 0
+      i = 0;
     }
 
     if (d.length === 0) {
@@ -30,10 +31,10 @@ const tailRecursiveSum = {
 };
 
 const forReferenceSum = {
-  description: (verbosity) => 'for loop sum for reference',
+  description: () => 'for loop sum for reference',
   f: (d) => {
     let sum = 0;
-    for(let i = 0; i < d.length; i++) {
+    for (let i = 0; i < d.length; i++) {
       sum += d[i];
     }
 
@@ -43,7 +44,7 @@ const forReferenceSum = {
 
 module.exports = {
   description: (verbosity) => {
-    switch(verbosity) {
+    switch (verbosity) {
       case VERBOSITY.QUIET:
         return '';
       case VERBOSITY.VERBOSE:
