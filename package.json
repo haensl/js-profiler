@@ -17,8 +17,15 @@
   "author": {
     "name": "Hans-Peter Dietz",
     "email": "h.p.dietz@gmail.com",
-    "twitter": "@h_p_d"
+    "twitter": "@h_p_d",
+    "url": "https://github.com/haensl"
   },
+  "contributors": [
+    {
+      "name": "Fabian Maschewski",
+      "url": "https://github.com/f-masche"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "glob": "^7.1.1",
@@ -41,5 +48,8 @@
   "bugs": {
     "url": "https://github.com/haensl/js-performance/issues"
   },
-  "homepage": "https://github.com/haensl/js-performance#readme"
+  "homepage": "https://github.com/haensl/js-performance#readme",
+  "bin": {
+    "js-performance": "./js-performance.js"
+  }
 }
