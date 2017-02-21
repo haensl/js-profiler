@@ -2,7 +2,7 @@
 
 const join = require('path').join;
 const expect = require('chai').expect;
-const recursions = require(join(__appRoot, 'profiles/recursion/recursion.profile'));
+const recursions = require(join(__appRoot, 'src/profiles/recursion/recursion.profile'));
 
 describe('Recursion', () => {
   let result;

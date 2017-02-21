@@ -7,11 +7,11 @@ global.__appRoot = __dirname;
 const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
-const DEFAULTS = require(join(__appRoot, 'support/defaults'));
-const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
-const testdata = require(join(__appRoot, 'support/testdata/testdata'));
-const ProfileRunner = require(join(__appRoot, 'profile-runner'));
-const Reporter = require(join(__appRoot, 'reporter/reporter'));
+const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
+const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
+const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
+const ProfileRunner = require(join(__appRoot, 'src/profile-runner'));
+const Reporter = require(join(__appRoot, 'src/reporter/reporter'));
 
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
@@ -50,7 +50,7 @@ const speak = verbosity > VERBOSITY.QUIET;
 let profiles = [];
 if (opts.argv.length > 0) {
   opts.argv.forEach((profileName) => {
-    const discoveredProfiles = glob.sync(`profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
+    const discoveredProfiles = glob.sync(`src/profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
     if (discoveredProfiles.length === 1) {
       profiles.push(require(join(__appRoot, discoveredProfiles.pop()))); // eslint-disable-line
     } else if (speak) {
@@ -58,16 +58,14 @@ if (opts.argv.length > 0) {
     }
   });
 } else {
-  profiles = profiles.concat(require(join(__appRoot, 'profiles/all'))); // eslint-disable-line
+  profiles = profiles.concat(require(join(__appRoot, 'src/profiles/all'))); // eslint-disable-line
 }
 
-const testRunner = new ProfileRunner({
+const profileRunner = new ProfileRunner({
   iterations,
   profiles,
   data
 });
 
-const reporter = new Reporter(testRunner, verbosity);
-testRunner.run();
-testRunner.run();
-testRunner.run();
+const reporter = new Reporter(profileRunner, verbosity, DEFAULTS.timeout);
+profileRunner.run();

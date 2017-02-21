@@ -1,7 +1,7 @@
 'use strict';
 
 const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'support/verbosity'));
+const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 
 const recursiveSum = {
   description: () => 'recursive sum',

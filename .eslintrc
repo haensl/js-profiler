@@ -10,6 +10,7 @@
       "impliedStrict": false
   },
   "rules": {
+    "valid-jsdoc": ["error", { "requireReturn": false }],
     "strict": ["error", "global"],
     "consistent-return": "off",
     "max-len": ["error", {
