@@ -5,6 +5,6 @@ const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 
 module.exports = {
   iterations: 1000,
-  verbosity: VERBOSITY.DEFAULT,
+  verbosity: VERBOSITY.NORMAL,
   testdataMagnitude: 1000
 };

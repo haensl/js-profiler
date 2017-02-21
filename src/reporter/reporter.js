@@ -21,13 +21,13 @@ class Reporter {
     });
 
     testRunner.on(ProfileRunner.PROFILE_START, (profile) => {
-      if (this.verbosity >= VERBOSITY.DEFAULT) {
+      if (this.verbosity >= VERBOSITY.NORMAL) {
         console.info(`${profile.description()}`);
       }
     });
 
     testRunner.on(ProfileRunner.PROFILE_END, (profile, result) => {
-      if (this.verbosity >= VERBOSITY.DEFAULT) {
+      if (this.verbosity >= VERBOSITY.NORMAL) {
         const best = result.testResults
           .sort((a, b) => a.averageTime - b.averageTime)[0];
         console.info(chalk.green(`  Winner: "${best.func.description()}" (${best.averageTime.toFixed(3)}ms)\n`));
@@ -35,13 +35,13 @@ class Reporter {
     });
 
     testRunner.on(ProfileRunner.TEST_START, (profile, func) => {
-      if (this.verbosity >= VERBOSITY.DEFAULT) {
+      if (this.verbosity >= VERBOSITY.NORMAL) {
         console.log(chalk.green(`  ${func.description()}`));
       }
     });
 
     testRunner.on(ProfileRunner.TEST_END, (profile, func, result) => {
-      if (this.verbosity >= VERBOSITY.DEFAULT) {
+      if (this.verbosity >= VERBOSITY.NORMAL) {
         console.info(`    ${result.averageTime.toFixed(3)}ms`);
         console.info();
       }
