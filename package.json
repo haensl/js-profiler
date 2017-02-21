@@ -7,7 +7,7 @@
     "start": "node js-performance.js",
     "test": "mocha spec.setup.js **/*.spec.js",
     "tdd": "mocha --recursive --watch spec.setup.js **/*.spec.js",
-    "lint": "eslint '**/*.js'"
+    "lint": "eslint --fix '**/*.js'"
   },
   "keywords": [
     "Performance",
@@ -24,10 +24,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.15.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.0",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"

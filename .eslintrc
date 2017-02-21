@@ -1,8 +1,8 @@
 {
-  "extends": "airbnb",
+  "extends": "eslint:recommended",
   "env": {
     "node": true,
-    "mocha": true,
+    "mocha": true
   },
    "parserOptions": {
       "ecmaVersion": 6,
@@ -31,9 +31,7 @@
     "arrow-parens": ["error", "always"],
     "no-mixed-operators" : ["error", { "allowSamePrecedence": true }],
     "no-console": "off",
-    "import/no-dynamic-require": "off",
-    "import/newline-after-import": "off",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    "operator-linebreak": ["error", "before"]
   },
   "globals": {
     "__appRoot": false

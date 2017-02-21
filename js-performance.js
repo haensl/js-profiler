@@ -19,12 +19,12 @@ const opts = new GetOpt([
     ['q', 'quiet', 'Print results only.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
     ['v', 'verbose', 'Print verbose information.']
-]).bindHelp()
+  ]).bindHelp()
   .parseSystem();
 
 let iterations = DEFAULTS.iterations;
-if ('iterations' in opts.options &&
-  !isNaN(parseInt(opts.options.iterations, 10))) {
+if ('iterations' in opts.options
+  && !isNaN(parseInt(opts.options.iterations, 10))) {
   iterations = parseInt(opts.options.iterations, 10);
 }
 
@@ -38,14 +38,12 @@ if ('verbose' in opts.options) {
 }
 
 let data;
-if ('magnitude' in opts.options &&
-  !isNaN(parseInt(opts.options.magnitude, 10))) {
+if ('magnitude' in opts.options
+  && !isNaN(parseInt(opts.options.magnitude, 10))) {
   data = testdata(parseInt(opts.options.magnitude, 10));
 } else {
   data = testdata();
 }
-
-const speak = verbosity > VERBOSITY.QUIET;
 
 let profiles = [];
 if (opts.argv.length > 0) {
@@ -53,7 +51,7 @@ if (opts.argv.length > 0) {
     const discoveredProfiles = glob.sync(`src/profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
     if (discoveredProfiles.length === 1) {
       profiles.push(require(join(__appRoot, discoveredProfiles.pop()))); // eslint-disable-line
-    } else if (speak) {
+    } else if (verbosity > VERBOSITY.QUIET) {
       console.info(`Skipping unknown profile "${profileName}".`);
     }
   });
@@ -67,5 +65,5 @@ const profileRunner = new ProfileRunner({
   data
 });
 
-const reporter = new Reporter(profileRunner, verbosity, DEFAULTS.timeout);
+new Reporter(profileRunner, verbosity, DEFAULTS.timeout);
 profileRunner.run();
