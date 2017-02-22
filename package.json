@@ -39,10 +39,6 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"
   },
-<<<<<<< HEAD
-  "engines": {
-    "node": ">=6.9.5"
-=======
   "engines" : {
     "node" : ">=6.9.5"
   },
@@ -56,6 +52,5 @@
   "homepage": "https://github.com/haensl/js-performance#readme",
   "bin": {
     "js-performance": "./js-performance.js"
->>>>>>> 738b21b6b0799781658551204e06edfe4cb76acc
   }
 }
