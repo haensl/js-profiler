@@ -5,8 +5,8 @@
   "main": "js-performance.js",
   "scripts": {
     "start": "node js-performance.js",
-    "test": "mocha spec.setup.js **/*.spec.js",
-    "tdd": "mocha --recursive --watch spec.setup.js **/*.spec.js",
+    "test": "mocha spec.setup.js '**/*.spec.js'",
+    "tdd": "mocha --recursive --watch spec.setup.js '**/*.spec.js'",
     "lint": "eslint --fix '**/*.js'"
   },
   "keywords": [
