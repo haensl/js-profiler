@@ -1,3 +1,6 @@
+### 1.4.0
+* #22: Add TravisCI integration
+
 ### 1.3.1
 * #21: Cleanup eslint
 
