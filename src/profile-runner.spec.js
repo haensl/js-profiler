@@ -14,10 +14,8 @@ describe('Profile Runner', () => {
   beforeEach(() => {
     options = {
       profiles: [{
-        description:  () => {},
         functions: [{
-          description: () => {},
-          f: () => {}
+          f: sinon.spy()
         }]
       }],
       iterations: 10,
@@ -55,6 +53,16 @@ describe('Profile Runner', () => {
       it(`Should emit the ${event} event`, () => {
         expect(spies[idx]).to.have.been.called;
       });
+    });
+
+    it('Should call the profiled function for the number of iterations', () => {
+      expect(options.profiles[0].functions[0].f)
+        .to.have.callCount(options.iterations);
+    });
+
+    it('Should pass the data to the profiled function', () => {
+      expect(options.profiles[0].functions[0].f)
+        .to.have.been.calledWith(options.data);
     });
   });
 });
