@@ -4,9 +4,9 @@ const join = require('path').join;
 const DEFAULTS = require(join(__appRoot, 'support/defaults'));
 
 const testdata = (len = DEFAULTS.testdataMagnitude) => {
-  let i = len;
+  let i = 0;
   const data = [];
-  while (i--) {
+  while (++i < len) {
     data.push(i);
   }
   return data;
