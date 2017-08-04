@@ -3,6 +3,7 @@
 const EventEmitter = require('events');
 const join = require('path').join;
 const clock = require(join(__appRoot, 'src/support/clock/clock'));
+const events = require(join(__appRoot, 'src/support/events'));
 
 class ProfileRunner extends EventEmitter {
 
@@ -25,11 +26,11 @@ class ProfileRunner extends EventEmitter {
   */
   run() {
     try {
-      this.emit(ProfileRunner.START, this.profiles);
+      this.emit(events.START, this.profiles);
       const results = this.profiles.map((profile) => this.runProfile(profile));
-      this.emit(ProfileRunner.END, results);
+      this.emit(events.END, results);
     } catch (err) {
-      this.emit(ProfileRunner.ERROR, err);
+      this.emit(events.ERROR, err);
     }
   }
 
@@ -40,13 +41,13 @@ class ProfileRunner extends EventEmitter {
   * @returns {object} The test result
   */
   runProfile(profile) {
-    this.emit(ProfileRunner.PROFILE_START, profile);
+    this.emit(events.PROFILE_START, profile);
     const result = {
       profile,
       testResults: profile.functions.map((func) =>
         this.runFunction(profile, func))
     };
-    this.emit(ProfileRunner.PROFILE_END, profile, result);
+    this.emit(events.PROFILE_END, profile, result);
     return result;
   }
 
@@ -58,7 +59,7 @@ class ProfileRunner extends EventEmitter {
   * @returns {object} The test result
   */
   runFunction(profile, func) {
-    this.emit(ProfileRunner.TEST_START, profile, func);
+    this.emit(events.TEST_START, profile, func);
     const testResult = {
       averageTime: 0,
       totalTime: 0,
@@ -70,17 +71,10 @@ class ProfileRunner extends EventEmitter {
     }
 
     testResult.averageTime = testResult.totalTime / this.iterations;
-    this.emit(ProfileRunner.TEST_END, profile, func, testResult);
+    this.emit(events.TEST_END, profile, func, testResult);
     return testResult;
   }
 }
 
-ProfileRunner.START = 'START';
-ProfileRunner.END = 'END';
-ProfileRunner.ERROR = 'ERROR';
-ProfileRunner.PROFILE_START = 'PROFILE_START';
-ProfileRunner.PROFILE_END = 'PROFILE_END';
-ProfileRunner.TEST_START = 'TEST_START';
-ProfileRunner.TEST_END = 'TEST_END';
 
 module.exports = ProfileRunner;

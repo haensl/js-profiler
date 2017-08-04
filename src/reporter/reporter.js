@@ -1,9 +1,9 @@
 'use strict';
 
 const join = require('path').join;
-const ProfileRunner = require(join(__appRoot, 'src/profile-runner'));
 const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 const chalk = require('chalk');
+const events = require(join(__appRoot, 'src/support/events'));
 
 class Reporter {
   /**
@@ -12,21 +12,21 @@ class Reporter {
   */
   constructor(profileRunner, verbosity) {
     this.verbosity = verbosity;
-    profileRunner.on(ProfileRunner.START, (profiles) => {
+    profileRunner.on(events.START, (profiles) => {
       console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.\n`);
     });
 
-    profileRunner.on(ProfileRunner.END, (profiles) => {
+    profileRunner.on(events.END, (profiles) => {
       console.log(`Finished ${profiles.length} profiles.`);
     });
 
-    profileRunner.on(ProfileRunner.PROFILE_START, (profile) => {
+    profileRunner.on(events.PROFILE_START, (profile) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         console.info(`${profile.description()}`);
       }
     });
 
-    profileRunner.on(ProfileRunner.PROFILE_END, (profile, result) => {
+    profileRunner.on(events.PROFILE_END, (profile, result) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         const best = result.testResults
           .sort((a, b) => a.averageTime - b.averageTime)[0];
@@ -34,20 +34,20 @@ class Reporter {
       }
     });
 
-    profileRunner.on(ProfileRunner.TEST_START, (profile, func) => {
+    profileRunner.on(events.TEST_START, (profile, func) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         console.log(chalk.green(`  ${func.description()}`));
       }
     });
 
-    profileRunner.on(ProfileRunner.TEST_END, (profile, func, result) => {
+    profileRunner.on(events.TEST_END, (profile, func, result) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         console.info(`    ${result.averageTime.toFixed(3)}ms`);
         console.info();
       }
     });
 
-    profileRunner.on(ProfileRunner.ERROR, (err) => {
+    profileRunner.on(events.ERROR, (err) => {
       console.error(err.stack);
     });
   }
