@@ -77,16 +77,17 @@ while (numProfiles--) {
   }
 
   profile.functions.forEach((fn) => {
-    let i = iterations;
-    let sum = 0;
-    while (i--) {
-      sum += clock.time(fn.f, data);
-    }
+    const timeTotal = clock.time((d, i) => {
+      let loops = iterations;
+      while(loops--) {
+        fn.f(d, i);
+      }
+    }, data);
 
     if (speak) {
       console.info('\t|..');
     }
 
-    console.info(`${speak ? '\t   ' : ''}${fn.description(verbosity)}: ${sum / iterations}ms`);
+    console.info(`${speak ? '\t   ' : ''}${fn.description(verbosity)}: ${timeTotal / iterations}ms`);
   });
 }

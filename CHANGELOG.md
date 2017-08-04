@@ -1,3 +1,6 @@
+### 1.5.0
+* Add array search profile
+
 ### 1.4.0
 * #22: Add TravisCI integration
 
