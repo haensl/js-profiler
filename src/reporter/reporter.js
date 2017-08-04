@@ -7,26 +7,26 @@ const chalk = require('chalk');
 
 class Reporter {
   /**
-  * @param {TestRunner} testRunner The test runner
+  * @param {ProfileRunner} profileRunner The test runner
   * @param {number} verbosity The verbosity level
   */
-  constructor(testRunner, verbosity) {
+  constructor(profileRunner, verbosity) {
     this.verbosity = verbosity;
-    testRunner.on(ProfileRunner.START, (profiles) => {
+    profileRunner.on(ProfileRunner.START, (profiles) => {
       console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.\n`);
     });
 
-    testRunner.on(ProfileRunner.END, (profiles) => {
+    profileRunner.on(ProfileRunner.END, (profiles) => {
       console.log(`Finished ${profiles.length} profiles.`);
     });
 
-    testRunner.on(ProfileRunner.PROFILE_START, (profile) => {
+    profileRunner.on(ProfileRunner.PROFILE_START, (profile) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         console.info(`${profile.description()}`);
       }
     });
 
-    testRunner.on(ProfileRunner.PROFILE_END, (profile, result) => {
+    profileRunner.on(ProfileRunner.PROFILE_END, (profile, result) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         const best = result.testResults
           .sort((a, b) => a.averageTime - b.averageTime)[0];
@@ -34,20 +34,20 @@ class Reporter {
       }
     });
 
-    testRunner.on(ProfileRunner.TEST_START, (profile, func) => {
+    profileRunner.on(ProfileRunner.TEST_START, (profile, func) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         console.log(chalk.green(`  ${func.description()}`));
       }
     });
 
-    testRunner.on(ProfileRunner.TEST_END, (profile, func, result) => {
+    profileRunner.on(ProfileRunner.TEST_END, (profile, func, result) => {
       if (this.verbosity >= VERBOSITY.NORMAL) {
         console.info(`    ${result.averageTime.toFixed(3)}ms`);
         console.info();
       }
     });
 
-    testRunner.on(ProfileRunner.ERROR, (err) => {
+    profileRunner.on(ProfileRunner.ERROR, (err) => {
       console.error(err.stack);
     });
   }
