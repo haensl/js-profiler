@@ -7,6 +7,7 @@ const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 const expect = chai.expect;
 const ProfileRunner = require('./profile-runner');
+const events = require('./support/events');
 
 describe('Profile Runner', () => {
   let profileRunner;
@@ -29,31 +30,27 @@ describe('Profile Runner', () => {
   });
 
   describe('When running', () => {
-    const events = [
-      ProfileRunner.START,
-      ProfileRunner.END,
-      ProfileRunner.PROFILE_START,
-      ProfileRunner.PROFILE_END,
-      ProfileRunner.TEST_START,
-      ProfileRunner.TEST_END
-    ];
     let spies;
 
     beforeEach(() => {
-      spies = events.map((event) => {
+      spies = new Map();
+      for (let event in events) {
         const spy = sinon.spy();
-        profileRunner.on(event, spy);
-        return spy;
-      });
+        profileRunner.on(events[event], spy);
+        spies.set(events[event], spy);
+      }
 
       profileRunner.run();
     });
 
-    events.forEach((event, idx) => {
+    for (let event in events) {
+      if (event === 'ERROR') {
+        continue;
+      }
       it(`Should emit the ${event} event`, () => {
-        expect(spies[idx]).to.have.been.called;
+        expect(spies.get(events[event])).to.have.been.called;
       });
-    });
+    }
 
     it('Should call the profiled function for the number of iterations', () => {
       expect(options.profiles[0].functions[0].f)
