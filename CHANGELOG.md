@@ -1,3 +1,6 @@
+### 1.5.0
+* #13: Separation of concerns
+
 ### 1.4.0
 * #22: Add TravisCI integration
 
