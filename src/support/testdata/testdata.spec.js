@@ -2,8 +2,8 @@
 
 const join = require('path').join;
 const expect = require('chai').expect;
-const testdata = require(join(__appRoot, 'support/testdata/testdata'));
-const DEFAULTS = require(join(__appRoot, 'support/defaults'));
+const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
+const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
 
 describe('testdata', () => {
   let data;
