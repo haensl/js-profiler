@@ -1,3 +1,7 @@
+### 1.6.0
+* [#10: Add profile for guards.](https://github.com/haensl/js-performance/issues/10)
+* Add command line option to specify result precision.
+
 ### 1.5.0
 * #13: Separation of concerns
 

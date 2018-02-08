@@ -13,12 +13,14 @@ class ProfileRunner extends EventEmitter {
   * @param {array} config.profiles An array of profiles
   * @param {number} config.iterations Number of iterations
   * @param {array} config.data An array of test data
+  * @param {number} config.precision Number of decimals to show for results
   */
   constructor(config) {
     super();
     this.profiles = config.profiles.slice();
     this.iterations = config.iterations;
     this.data = config.data;
+    this.precision = config.precision;
   }
 
   /**

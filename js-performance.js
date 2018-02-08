@@ -16,8 +16,9 @@ const Reporter = require(join(__appRoot, 'src/reporter/reporter'));
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
     ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
-    ['q', 'quiet', 'Print results only.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
+    ['p', 'precision=', `Specify the precision in terms of decimal places of results. Default: ${DEFAULTS.precision} decimals.`],
+    ['q', 'quiet', 'Print results only.'],
     ['v', 'verbose', 'Print verbose information.']
   ]).bindHelp()
   .parseSystem();
@@ -45,6 +46,12 @@ if ('magnitude' in opts.options
   data = testdata();
 }
 
+let precision = DEFAULTS.precision;
+if ('precision' in opts.options
+  && !isNaN(parseInt(opts.options.precision, 10))) {
+  precision = parseInt(opts.options.precision, 10);
+}
+
 let profiles = [];
 if (opts.argv.length > 0) {
   opts.argv.forEach((profileName) => {
@@ -65,5 +72,5 @@ const profileRunner = new ProfileRunner({
   data
 });
 
-new Reporter(profileRunner, verbosity, DEFAULTS.timeout);
+new Reporter(profileRunner, verbosity, precision);
 profileRunner.run();
