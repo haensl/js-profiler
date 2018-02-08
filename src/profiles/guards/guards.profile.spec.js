@@ -20,7 +20,11 @@ describe('Guards', () => {
       });
 
       it('should transform the array correctly into booleans', () => {
-        expect(result).to.be.true;
+        if (fn.description() === '!var') {
+          expect(result).to.be.false;
+        } else {
+          expect(result).to.be.true;
+        }
       });
     });
   });

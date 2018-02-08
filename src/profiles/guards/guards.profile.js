@@ -11,9 +11,14 @@ const guardIsArray = {
   f: (d) => Array.isArray(d)
 };
 
-const guardNot = {
+const guardNotNot = {
   description: () => '!!var',
   f: (d) => !!d
+};
+
+const guardNot = {
+  description: () => '!var',
+  f: (d) => !d
 };
 
 const guardIsNaN = {
@@ -35,6 +40,7 @@ module.exports = {
   functions: [
     guardTypeof,
     guardIsArray,
+    guardNotNot,
     guardNot,
     guardIsNaN
   ]
