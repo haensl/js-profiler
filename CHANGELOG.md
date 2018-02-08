@@ -1,3 +1,6 @@
+### 1.5.1
+* [#8: Rename profiles/all to profiles/index.js.](https://github.com/haensl/js-performance/issues/8)
+
 ### 1.5.0
 * #13: Separation of concerns
 

@@ -56,7 +56,7 @@ if (opts.argv.length > 0) {
     }
   });
 } else {
-  profiles = profiles.concat(require(join(__appRoot, 'src/profiles/all'))); // eslint-disable-line
+  profiles = profiles.concat(require(join(__appRoot, 'src/profiles/'))); // eslint-disable-line
 }
 
 const profileRunner = new ProfileRunner({
