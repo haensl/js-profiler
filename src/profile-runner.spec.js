@@ -20,7 +20,7 @@ describe('Profile Runner', () => {
         }]
       }],
       iterations: 10,
-      data: []
+      magnitude: 10
     };
     profileRunner = new ProfileRunner(options);
   });
@@ -55,11 +55,6 @@ describe('Profile Runner', () => {
     it('Should call the profiled function for the number of iterations', () => {
       expect(options.profiles[0].functions[0].f)
         .to.have.callCount(options.iterations);
-    });
-
-    it('Should pass the data to the profiled function', () => {
-      expect(options.profiles[0].functions[0].f)
-        .to.have.been.calledWith(options.data);
     });
   });
 });

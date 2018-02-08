@@ -1,29 +1,44 @@
 const join = require('path').join;
 const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 
-const guardTypeof = {
-  description: () => 'typeof',
-  f: (d) => typeof d !== 'undefined'
+const guardTypeofNotUndefined = {
+  description: () => 'typeof !== undefined',
+  f: (d) => typeof d.num !== 'undefined'
+};
+
+const guardTypeofIsType = {
+  description: () => 'typeof === type',
+  f: (d) => typeof d.num === 'number'
 };
 
 const guardIsArray = {
   description: () => 'Array.isArray',
-  f: (d) => Array.isArray(d)
+  f: (d) => Array.isArray(d.arr)
 };
 
 const guardNotNot = {
   description: () => '!!var',
-  f: (d) => !!d
+  f: (d) => !!d.str
 };
 
 const guardNot = {
   description: () => '!var',
-  f: (d) => !d
+  f: (d) => !d.str
 };
 
 const guardIsNaN = {
   description: () => '!isNaN(var)',
-  f: (d) => isNaN(d)
+  f: (d) => !isNaN(d.num)
+};
+
+const guardIn = {
+  description: () => 'prop in obj',
+  f: (d) => 'num' in d
+};
+
+const guardHasOwnProperty = {
+  description: () => 'obj.hasOwnProperty(prop)',
+  f: (d) => d.hasOwnProperty('num')
 };
 
 module.exports = {
@@ -38,10 +53,14 @@ module.exports = {
     }
   },
   functions: [
-    guardTypeof,
+    guardTypeofNotUndefined,
+    guardTypeofIsType,
     guardIsArray,
     guardNotNot,
     guardNot,
-    guardIsNaN
-  ]
+    guardIsNaN,
+    guardIn,
+    guardHasOwnProperty
+  ],
+  testDataType: 'object'
 };

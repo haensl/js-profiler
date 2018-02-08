@@ -4,6 +4,7 @@ const EventEmitter = require('events');
 const join = require('path').join;
 const clock = require(join(__appRoot, 'src/support/clock/clock'));
 const events = require(join(__appRoot, 'src/support/events'));
+const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
 
 class ProfileRunner extends EventEmitter {
 
@@ -12,13 +13,13 @@ class ProfileRunner extends EventEmitter {
   * @param {object} config Configuration object
   * @param {array} config.profiles An array of profiles
   * @param {number} config.iterations Number of iterations
-  * @param {array} config.data An array of test data
+  * @param {number} config.magnitude Magnitude of test data
   */
   constructor(config) {
     super();
     this.profiles = config.profiles.slice();
     this.iterations = config.iterations;
-    this.data = config.data;
+    this.magnitude = config.magnitude;
   }
 
   /**
@@ -42,10 +43,11 @@ class ProfileRunner extends EventEmitter {
   */
   runProfile(profile) {
     this.emit(events.PROFILE_START, profile);
+    const data = testdata(profile.testDataType, this.magnitude);
     const result = {
       profile,
       testResults: profile.functions.map((func) =>
-        this.runFunction(profile, func))
+        this.runFunction(profile, func, data))
     };
     this.emit(events.PROFILE_END, profile, result);
     return result;
@@ -56,9 +58,10 @@ class ProfileRunner extends EventEmitter {
   * @private
   * @param {object} profile A profile
   * @param {object} func A profile function
+  * @param {any} data The test data
   * @returns {object} The test result
   */
-  runFunction(profile, func) {
+  runFunction(profile, func, data) {
     this.emit(events.TEST_START, profile, func);
     const testResult = {
       averageTime: 0,
@@ -67,7 +70,7 @@ class ProfileRunner extends EventEmitter {
     };
 
     for (let i = 0; i < this.iterations; i++) {
-      testResult.totalTime += clock.time(func.f, this.data);
+      testResult.totalTime += clock.time(func.f, data);
     }
 
     testResult.averageTime = testResult.totalTime / this.iterations;

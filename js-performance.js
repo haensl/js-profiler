@@ -9,7 +9,6 @@ const join = require('path').join;
 const GetOpt = require('node-getopt');
 const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
 const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
-const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
 const ProfileRunner = require(join(__appRoot, 'src/profile-runner'));
 const Reporter = require(join(__appRoot, 'src/reporter/reporter'));
 
@@ -38,12 +37,10 @@ if ('verbose' in opts.options) {
   verbosity = VERBOSITY.VERBOSE;
 }
 
-let data;
+let magnitude = DEFAULTS.testdataMagnitude;
 if ('magnitude' in opts.options
   && !isNaN(parseInt(opts.options.magnitude, 10))) {
-  data = testdata(parseInt(opts.options.magnitude, 10));
-} else {
-  data = testdata();
+  magnitude = parseInt(opts.options.magnitude, 10);
 }
 
 let precision = DEFAULTS.precision;
@@ -69,7 +66,7 @@ if (opts.argv.length > 0) {
 const profileRunner = new ProfileRunner({
   iterations,
   profiles,
-  data
+  magnitude
 });
 
 new Reporter(profileRunner, verbosity, precision);

@@ -6,7 +6,11 @@ describe('Guards', () => {
   let data;
   let result;
   beforeEach(() => {
-    data = [0, 1, 2, 3, 4, 5];
+    data = {
+      num: 1,
+      arr: [],
+      str: 'abc'
+    };
   });
 
   guards.functions.forEach((fn) => {
