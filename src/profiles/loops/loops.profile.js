@@ -113,5 +113,6 @@ module.exports = {
     loopMap,
     loopWhile,
     loopWhileFixedLen
-  ]
+  ],
+  testDataType: 'array'
 };

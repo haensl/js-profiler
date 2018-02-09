@@ -30,11 +30,21 @@ describe('testdata', () => {
 
     describe('and specifying the magnitude', () => {
       beforeEach(() => {
-        data = testdata(100);
+        data = testdata('array', 100);
       });
 
       it('should generate an array with the given magnitude', () => {
         expect(data.length).to.eql(100);
+      });
+    });
+
+    describe('and specifying object type', () => {
+      beforeEach(() => {
+        data = testdata('object');
+      });
+
+      it('should generate an object', () => {
+        expect(typeof data).to.equal('object');
       });
     });
   });

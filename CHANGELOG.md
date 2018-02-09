@@ -1,3 +1,8 @@
+### 1.8.0
+* [#10: Add profile for guards.](https://github.com/haensl/js-performance/issues/10)
+* Add command line option to specify result precision.
+* Add test data type `object`.
+
 ### 1.7.0
 * [#25: Add command line option to list available profiles.](https://github.com/haensl/js-performance/issues/25)
 

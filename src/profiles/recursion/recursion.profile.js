@@ -57,5 +57,6 @@ module.exports = {
     forReferenceSum,
     recursiveSum,
     tailRecursiveSum
-  ]
+  ],
+  testDataType: 'array'
 };

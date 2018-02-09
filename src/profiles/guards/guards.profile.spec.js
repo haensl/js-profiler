@@ -1,0 +1,34 @@
+const expect = require('chai').expect;
+const guards = requireModule('src/profiles/guards/guards.profile');
+
+describe('Guards', () => {
+  let data;
+  let result;
+  beforeEach(() => {
+    data = {
+      num: 1,
+      arr: [],
+      str: 'abc'
+    };
+  });
+
+  guards.functions.forEach((fn) => {
+    describe(`${fn.description()}`, () => {
+      beforeEach(() => {
+        result = fn.f(data);
+      });
+
+      it('should return a boolean', () => {
+        expect(typeof result).to.equal('boolean');
+      });
+
+      it('should transform the array correctly into booleans', () => {
+        if (fn.description() === '!var') {
+          expect(result).to.be.false;
+        } else {
+          expect(result).to.be.true;
+        }
+      });
+    });
+  });
+});
