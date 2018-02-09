@@ -1,6 +1,5 @@
-const join = require('path').join;
 const expect = require('chai').expect;
-const mapAccess = require(join(__appRoot, 'src/profiles/map-access/map-access.profile'));
+const mapAccess = requireModule('src/profiles/map-access/map-access.profile');
 
 describe('Object literal vs. Map access', () => {
   let result;

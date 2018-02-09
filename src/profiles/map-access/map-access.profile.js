@@ -1,5 +1,4 @@
-const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
+const VERBOSITY = requireModule('src/support/verbosity');
 
 const randInt = (max) =>
   Math.floor(Math.random() * Math.floor(max));

@@ -1,6 +1,5 @@
-const join = require('path').join;
 const expect = require('chai').expect;
-const mapCreation = require(join(__appRoot, 'src/profiles/map-creation/map-creation.profile'));
+const mapCreation = requireModule('src/profiles/map-creation/map-creation.profile');
 
 describe('Object literal vs. Map creation', () => {
   let result;
