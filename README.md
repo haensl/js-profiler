@@ -26,6 +26,13 @@ To run specific profiles simply supply their names separated by spaces when star
 ./js-performance --help
 ```
 
+### Listing available performance profiles
+
+```bash
+./js-performance -l
+./js-performance --list
+```
+
 ### Setting the number of iterations per profiled function
 
 **default:** 1000
