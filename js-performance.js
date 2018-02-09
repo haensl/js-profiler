@@ -7,6 +7,7 @@ global.__appRoot = __dirname;
 const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
+const chalk = require('chalk');
 const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
 const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
@@ -26,7 +27,7 @@ const opts = new GetOpt([
 if ('list' in opts.options) {
   require(join(__appRoot, 'src/profiles/all'))
     .forEach((profile) => {
-      console.info(`${profile.name}\n${profile.description(VERBOSITY.VERBOSE)}\n`);
+      console.info(`${chalk.bold.underline(profile.name)}\n${profile.description(VERBOSITY.VERBOSE)}\n`);
     });
   process.exit(0);
 }
