@@ -1,3 +1,6 @@
+### 1.6.1
+* [#8: Rename profiles/all to profiles/index.js.](https://github.com/haensl/js-performance/issues/8)
+
 ### 1.6.0
 * [#1: Update readme.](https://github.com/haensl/js-performance/issues/1)
 * Adjust verbosity settings.
