@@ -1,3 +1,7 @@
+### 1.9.0
+* [#32: Add JSON reporter.](https://github.com/haensl/js-performance/issues/32)
+* Major refactoring of project file structure
+
 ### 1.8.0
 * [#10: Add profile for guards.](https://github.com/haensl/js-performance/issues/10)
 * Add command line option to specify result precision.
