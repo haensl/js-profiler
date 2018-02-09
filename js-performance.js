@@ -16,11 +16,20 @@ const Reporter = require(join(__appRoot, 'src/reporter/reporter'));
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
     ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
+    ['l', 'list', 'List available profiles.'],
     ['q', 'quiet', 'Print results only.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
     ['v', 'verbose', 'Print verbose information.']
   ]).bindHelp()
   .parseSystem();
+
+if ('list' in opts.options) {
+  require(join(__appRoot, 'src/profiles/all'))
+    .forEach((profile) => {
+      console.info(`${profile.name}\n${profile.description(VERBOSITY.VERBOSE)}\n`);
+    });
+  process.exit(0);
+}
 
 let iterations = DEFAULTS.iterations;
 if ('iterations' in opts.options

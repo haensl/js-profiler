@@ -1,3 +1,6 @@
+### 1.6.0
+* [#25: Add command line option to list available profiles.](https://github.com/haensl/js-performance/issues/25)
+
 ### 1.5.0
 * #13: Separation of concerns
 
