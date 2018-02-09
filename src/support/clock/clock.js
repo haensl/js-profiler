@@ -1,7 +1,6 @@
 'use strict';
 
-const join = require('path').join;
-const testdata = require(join(__appRoot, 'src/support/testdata/testdata'))();
+const testdata = requireModule('src/support/testdata/testdata')();
 
 const delta = (start) => {
   if (!Array.isArray(start)) {

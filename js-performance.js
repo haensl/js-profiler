@@ -2,16 +2,16 @@
 
 'use strict';
 
-global.__appRoot = __dirname;
-
 const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
-const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
-const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
-const ProfileRunner = require(join(__appRoot, 'src/profile-runner'));
-const Reporter = require(join(__appRoot, 'src/reporter/reporter'));
+const appRoot = __dirname;
+global.requireModule = (module) => require(join(appRoot, module));
+const DEFAULTS = requireModule('src/support/defaults');
+const VERBOSITY = requireModule('src/support/verbosity');
+const testdata = requireModule('src/support/testdata/testdata');
+const ProfileRunner = requireModule('src/profile-runner');
+const Reporter = requireModule('src/reporter/reporter');
 
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
@@ -50,13 +50,13 @@ if (opts.argv.length > 0) {
   opts.argv.forEach((profileName) => {
     const discoveredProfiles = glob.sync(`src/profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
     if (discoveredProfiles.length === 1) {
-      profiles.push(require(join(__appRoot, discoveredProfiles.pop()))); // eslint-disable-line
+      profiles.push(requireModule(discoveredProfiles.pop()));
     } else if (verbosity >= VERBOSITY.NORMAL) {
       console.info(`Skipping unknown profile "${profileName}".`);
     }
   });
 } else {
-  profiles = profiles.concat(require(join(__appRoot, 'src/profiles/'))); // eslint-disable-line
+  profiles = profiles.concat(requireModule('src/profiles'));
 }
 
 const profileRunner = new ProfileRunner({

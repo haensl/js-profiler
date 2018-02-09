@@ -1,3 +1,4 @@
 'use strict';
-
-global.__appRoot = __dirname;
+const join = require('path').join;
+const appRoot = __dirname;
+global.requireModule = (module) => require(join(appRoot, module));

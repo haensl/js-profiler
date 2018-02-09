@@ -1,3 +1,6 @@
+### 1.6.2
+* [#23: DRY: add global `requireModule` function.](https://github.com/haensl/js-performance/issues/23)
+
 ### 1.6.1
 * [#8: Rename profiles/all to profiles/index.js.](https://github.com/haensl/js-performance/issues/8)
 
