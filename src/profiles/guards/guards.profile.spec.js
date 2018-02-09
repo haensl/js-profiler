@@ -1,6 +1,5 @@
-const join = require('path').join;
 const expect = require('chai').expect;
-const guards = require(join(__appRoot, 'src/profiles/guards/guards.profile'));
+const guards = requireModule('src/profiles/guards/guards.profile');
 
 describe('Guards', () => {
   let data;

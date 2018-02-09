@@ -10,7 +10,6 @@ const appRoot = __dirname;
 global.requireModule = (module) => require(join(appRoot, module));
 const DEFAULTS = requireModule('src/support/defaults');
 const VERBOSITY = requireModule('src/support/verbosity');
-const testdata = requireModule('src/support/testdata/testdata');
 const ProfileRunner = requireModule('src/profile-runner');
 const Reporter = requireModule('src/reporter/reporter');
 
@@ -18,7 +17,6 @@ const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
     ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
     ['l', 'list', 'List available profiles.'],
-    ['q', 'quiet', 'Print results only.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
     ['p', 'precision=', `Specify the precision in terms of decimal places of results. Default: ${DEFAULTS.precision} decimals.`],
     ['q', 'quiet', 'Print results only.'],
