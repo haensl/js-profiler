@@ -94,6 +94,7 @@ const loopMap = {
 };
 
 module.exports = {
+  name: 'loops',
   description: (verbosity) => {
     switch (verbosity) {
       case VERBOSITY.QUIET:

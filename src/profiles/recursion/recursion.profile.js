@@ -42,6 +42,7 @@ const forReferenceSum = {
 };
 
 module.exports = {
+  name: 'recursion',
   description: (verbosity) => {
     switch (verbosity) {
       case VERBOSITY.QUIET:
