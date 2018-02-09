@@ -3,7 +3,7 @@
 const join = require('path').join;
 const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
 
-const testArray = (len) => {
+const intArray = (len) => {
   let i = len;
   const data = [];
   while (i--) {
@@ -13,7 +13,7 @@ const testArray = (len) => {
   return data;
 };
 
-const testObject = () => ({
+const definedObject = () => ({
     num: 1,
     obj: {
       str: 'd'
@@ -23,13 +23,37 @@ const testObject = () => ({
     bool: true
 });
 
-const testdata = (type = 'array', len = DEFAULTS.testdataMagnitude) => {
+const objectMap = (len) => {
+  let i = len;
+  const m = {};
+  while (i--) {
+    m[i] = i;
+  }
+
+  m.size = len;
+  return m;
+};
+
+const map = (len) => {
+  let i = len;
+  const m = new Map();
+  while (i--) {
+    m.set(i, i);
+  }
+
+  return m;
+};
+
+module.exports = (type = 'array', len = DEFAULTS.testdataMagnitude) => {
   switch(type) {
     case 'object':
-      return testObject();
+      return definedObject();
+    case 'objectMap':
+      return objectMap(len);
+    case 'map':
+      return map(len);
     default:
-      return testArray(len);
+      return intArray(len);
   }
 };
 
-module.exports = testdata;

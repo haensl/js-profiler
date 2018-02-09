@@ -1,6 +1,6 @@
 {
   "name": "js-performance",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Collection of performance profiles for various JavaScript built-ins.",
   "main": "js-performance.js",
   "scripts": {

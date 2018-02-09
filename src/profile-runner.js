@@ -62,6 +62,10 @@ class ProfileRunner extends EventEmitter {
   * @returns {object} The test result
   */
   runFunction(profile, func, data) {
+    if (func.testDataType) {
+      data = testdata(func.testDataType, this.magnitude);
+    }
+
     this.emit(events.TEST_START, profile, func);
     const testResult = {
       averageTime: 0,
