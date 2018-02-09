@@ -1,7 +1,6 @@
 'use strict';
 
-const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
+const VERBOSITY = requireModule('src/support/verbosity');
 
 const loopForEach = {
   description: () => '[].forEach() => []',
@@ -95,6 +94,7 @@ const loopMap = {
 };
 
 module.exports = {
+  name: 'loops',
   description: (verbosity) => {
     switch (verbosity) {
       case VERBOSITY.QUIET:

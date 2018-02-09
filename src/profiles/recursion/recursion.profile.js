@@ -1,7 +1,6 @@
 'use strict';
 
-const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
+const VERBOSITY = requireModule('src/support/verbosity');
 
 const recursiveSum = {
   description: () => 'recursive sum',
@@ -43,6 +42,7 @@ const forReferenceSum = {
 };
 
 module.exports = {
+  name: 'recursion',
   description: (verbosity) => {
     switch (verbosity) {
       case VERBOSITY.QUIET:
