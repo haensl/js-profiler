@@ -11,12 +11,17 @@ class Reporter {
   */
   constructor(profileRunner, verbosity) {
     this.verbosity = verbosity;
+
     profileRunner.on(events.START, (profiles) => {
-      console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.\n`);
+      if (this.verbosity === VERBOSITY.VERBOSE) {
+        console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.\n`);
+      }
     });
 
     profileRunner.on(events.END, (profiles) => {
-      console.log(`Finished ${profiles.length} profiles.`);
+      if (this.verbosity >= VERBOSITY.VERBOSE) {
+        console.log(`Finished ${profiles.length} profiles.`);
+      }
     });
 
     profileRunner.on(events.PROFILE_START, (profile) => {
@@ -26,11 +31,9 @@ class Reporter {
     });
 
     profileRunner.on(events.PROFILE_END, (profile, result) => {
-      if (this.verbosity >= VERBOSITY.NORMAL) {
-        const best = result.testResults
-          .sort((a, b) => a.averageTime - b.averageTime)[0];
-        console.info(chalk.green(`  Winner: "${best.func.description()}" (${best.averageTime.toFixed(3)}ms)\n`));
-      }
+      const best = result.testResults
+        .sort((a, b) => a.averageTime - b.averageTime)[0];
+      console.info(chalk.green(`  Fastest: "${best.func.description()}" (${best.averageTime.toFixed(3)}ms)\n`));
     });
 
     profileRunner.on(events.TEST_START, (profile, func) => {

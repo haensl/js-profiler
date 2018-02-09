@@ -1,7 +1,7 @@
 {
   "name": "js-performance",
-  "version": "1.5.1",
-  "description": "Collection of performance profiles for various JavaScript built-ins.",
+  "version": "1.6.2",
+  "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "js-performance.js",
   "scripts": {
     "start": "node js-performance.js",

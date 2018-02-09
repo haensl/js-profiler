@@ -50,13 +50,13 @@ if (opts.argv.length > 0) {
   opts.argv.forEach((profileName) => {
     const discoveredProfiles = glob.sync(`src/profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
     if (discoveredProfiles.length === 1) {
-      profiles.push(require(join(__appRoot, discoveredProfiles.pop()))); // eslint-disable-line
+      profiles.push(requireModule(discoveredProfiles.pop()));
     } else if (verbosity >= VERBOSITY.NORMAL) {
       console.info(`Skipping unknown profile "${profileName}".`);
     }
   });
 } else {
-  profiles = profiles.concat(requireModule('src/profiles/all')); // eslint-disable-line
+  profiles = profiles.concat(requireModule('src/profiles'));
 }
 
 const profileRunner = new ProfileRunner({
