@@ -1,3 +1,6 @@
+### 1.5.1
+* [#23: DRY: add global `requireModule` function.](https://github.com/haensl/js-performance/issues/23)
+
 ### 1.5.0
 * #13: Separation of concerns
 

@@ -35,6 +35,6 @@
     "operator-linebreak": ["error", "before"]
   },
   "globals": {
-    "__appRoot": false
+    "requireModule": false
   }
 }
