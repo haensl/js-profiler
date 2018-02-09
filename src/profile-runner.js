@@ -1,9 +1,8 @@
 'use strict';
 
 const EventEmitter = require('events');
-const join = require('path').join;
-const clock = require(join(__appRoot, 'src/support/clock/clock'));
-const events = require(join(__appRoot, 'src/support/events'));
+const clock = requireModule('src/support/clock/clock');
+const events = requireModule('src/support/events');
 
 class ProfileRunner extends EventEmitter {
 

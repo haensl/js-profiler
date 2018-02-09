@@ -1,7 +1,6 @@
 'use strict';
 
-const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
+const VERBOSITY = requireModule('src/support/verbosity');
 
 module.exports = {
   iterations: 1000,

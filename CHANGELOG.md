@@ -1,6 +1,12 @@
 ### 1.7.0
 * [#25: Add command line option to list available profiles.](https://github.com/haensl/js-performance/issues/25)
 
+### 1.6.2
+* [#23: DRY: add global `requireModule` function.](https://github.com/haensl/js-performance/issues/23)
+
+### 1.6.1
+* [#8: Rename profiles/all to profiles/index.js.](https://github.com/haensl/js-performance/issues/8)
+
 ### 1.6.0
 * [#1: Update readme.](https://github.com/haensl/js-performance/issues/1)
 * Adjust verbosity settings.

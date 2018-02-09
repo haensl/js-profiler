@@ -1,9 +1,8 @@
 'use strict';
 
-const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 const chalk = require('chalk');
-const events = require(join(__appRoot, 'src/support/events'));
+const VERBOSITY = requireModule('src/support/verbosity');
+const events = requireModule('src/support/events');
 
 class Reporter {
   /**
