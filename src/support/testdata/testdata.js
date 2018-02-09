@@ -1,7 +1,6 @@
 'use strict';
 
-const join = require('path').join;
-const DEFAULTS = require(join(__appRoot, 'src/support/defaults'));
+const DEFAULTS = requireModule('src/support/defaults');
 
 const intArray = (len) => {
   let i = len;

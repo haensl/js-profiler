@@ -1,8 +1,7 @@
 'use strict';
 
-const join = require('path').join;
 const expect = require('chai').expect;
-const loops = require(join(__appRoot, 'src/profiles/loops/loops.profile'));
+const loops = requireModule('src/profiles/loops/loops.profile');
 
 describe('Loops', () => {
   let result;

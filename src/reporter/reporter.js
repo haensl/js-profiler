@@ -1,25 +1,29 @@
 'use strict';
 
-const join = require('path').join;
-const VERBOSITY = require(join(__appRoot, 'src/support/verbosity'));
 const chalk = require('chalk');
-const events = require(join(__appRoot, 'src/support/events'));
+const VERBOSITY = requireModule('src/support/verbosity');
+const events = requireModule('src/support/events');
 
 class Reporter {
   /**
   * @param {ProfileRunner} profileRunner The test runner
   * @param {number} verbosity The verbosity level
+  * @param {number} precision The number of decimal places to print for results
   */
   constructor(profileRunner, verbosity, precision) {
     this.verbosity = verbosity;
     this.precision = precision;
 
     profileRunner.on(events.START, (profiles) => {
-      console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.\n`);
+      if (this.verbosity === VERBOSITY.VERBOSE) {
+        console.info(`Executing ${profiles.length} profile${profiles.length === 1 ? '' : 's'}.\n`);
+      }
     });
 
     profileRunner.on(events.END, (profiles) => {
-      console.log(`Finished ${profiles.length} profiles.`);
+      if (this.verbosity >= VERBOSITY.VERBOSE) {
+        console.log(`Finished ${profiles.length} profiles.`);
+      }
     });
 
     profileRunner.on(events.PROFILE_START, (profile) => {

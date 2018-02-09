@@ -1,10 +1,9 @@
 'use strict';
 
 const EventEmitter = require('events');
-const join = require('path').join;
-const clock = require(join(__appRoot, 'src/support/clock/clock'));
-const events = require(join(__appRoot, 'src/support/events'));
-const testdata = require(join(__appRoot, 'src/support/testdata/testdata'));
+const clock = requireModule('src/support/clock/clock');
+const events = requireModule('src/support/events');
+const testdata = requireModule('src/support/testdata/testdata');
 
 class ProfileRunner extends EventEmitter {
 
@@ -43,11 +42,10 @@ class ProfileRunner extends EventEmitter {
   */
   runProfile(profile) {
     this.emit(events.PROFILE_START, profile);
-    const data = testdata(profile.testDataType, this.magnitude);
     const result = {
       profile,
       testResults: profile.functions.map((func) =>
-        this.runFunction(profile, func, data))
+        this.runFunction(profile, func, testdata(profile.testDataType, this.magnitude)))
     };
     this.emit(events.PROFILE_END, profile, result);
     return result;
