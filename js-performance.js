@@ -8,14 +8,16 @@ const GetOpt = require('node-getopt');
 const chalk = require('chalk');
 const appRoot = __dirname;
 global.requireModule = (module) => require(join(appRoot, module));
-const DEFAULTS = requireModule('src/support/defaults');
-const VERBOSITY = requireModule('src/support/verbosity');
-const ProfileRunner = requireModule('src/profile-runner');
-const Reporter = requireModule('src/reporter/reporter');
+const DEFAULTS = requireModule('lib/support/defaults');
+const VERBOSITY = requireModule('lib/support/verbosity');
+const ProfileRunner = requireModule('lib/profile-runner');
+const ConsoleReporter = requireModule('lib/reporter/console');
+const JSONReporter = requireModule('lib/reporter/json');
 
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
     ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
+    ['j', 'json', `Output results in JSON format.`],
     ['l', 'list', 'List available profiles.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.testdataMagnitude}.`],
     ['p', 'precision=', `Specify the precision in terms of decimal places of results. Default: ${DEFAULTS.precision} decimals.`],
@@ -25,7 +27,7 @@ const opts = new GetOpt([
   .parseSystem();
 
 if ('list' in opts.options) {
-  requireModule('src/profiles')
+  requireModule('lib/profiles')
     .forEach((profile) => {
       console.info(`${chalk.bold.underline(profile.name)}\n${profile.description(VERBOSITY.VERBOSE)}\n`);
     });
@@ -59,18 +61,9 @@ if ('precision' in opts.options
   precision = parseInt(opts.options.precision, 10);
 }
 
-let profiles = [];
+let profiles = requireModule('lib/profiles');
 if (opts.argv.length > 0) {
-  opts.argv.forEach((profileName) => {
-    const discoveredProfiles = glob.sync(`src/profiles/**/@(${profileName}.profile|${profileName}.profile.js|${profileName}.js)`);
-    if (discoveredProfiles.length === 1) {
-      profiles.push(requireModule(discoveredProfiles.pop()));
-    } else if (verbosity >= VERBOSITY.NORMAL) {
-      console.info(`Skipping unknown profile "${profileName}".`);
-    }
-  });
-} else {
-  profiles = profiles.concat(requireModule('src/profiles'));
+  profiles = profiles.filter((profile) => opts.argv.includes(profile.name));
 }
 
 const profileRunner = new ProfileRunner({
@@ -79,5 +72,8 @@ const profileRunner = new ProfileRunner({
   magnitude
 });
 
-new Reporter(profileRunner, verbosity, precision);
+const reporter = 'json' in opts.options
+  ? new JSONReporter(verbosity, precision)
+  : new ConsoleReporter(verbosity, precision);
+reporter.reportOn(profileRunner);
 profileRunner.run();
