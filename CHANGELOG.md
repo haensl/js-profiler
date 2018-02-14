@@ -1,3 +1,6 @@
+### 1.10.0
+* [#11: Add profiles to compare Map vs. object literal.](https://github.com/haensl/js-performance/issues/11)
+
 ### 1.9.0
 * [#32: Add JSON reporter.](https://github.com/haensl/js-performance/issues/32)
 * Major refactoring of project file structure
