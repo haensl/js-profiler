@@ -31,6 +31,7 @@ jsperformance()
 
 For configuration options please refer to the [Library documentation](docs/lib.md).
 
+## [Documentation](docs/index.md)
 
 ## [Changelog](CHANGELOG.md)
 
