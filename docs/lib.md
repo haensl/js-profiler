@@ -14,70 +14,76 @@ const options = {
 };
 
 // 3. Run the profiler
-jsperformance(options)
+jsperformance.run(options)
   .then((report) => {
     console.log(JSON.stringify(report, null, 2));
   });
 ```
 
-Calling `jsperformance()` returns a `Promise` which resolves with either the profiling results or the list of available profiles.
+The `js-performance` module exports an object providing two functions:
 
-### Options
+### `list(verbosity) => Array<object>`
+
+Returns an array of available profiles. Each profile is represented by a name and description.
+
+#### Parameters
+
+##### verbosity `int`
+
+**default:** `1`
+
+The verbosity to use for profile description output.
+
+Use the constants provided in [verbosity](../lib/support/verbosity/index.js).
+
+### `run(options) => Promise`
+
+Calling `run()` starts profile execution and returns a `Promise` which resolves with the profiling results.
+
+#### Parameters
+
+#### options `object`
 
 The library provides analogous options to the [CLI](cli.md).
 
-#### console `boolean`
+##### console `boolean`
 
 **default:** `false`
 
 If set to true, a [ConsoleReporter](../lib/reporter/console/index.js) is attached, writing profile results to the console.
 
-#### iterations `int`
+##### iterations `int`
 
 **default:** `1000`
 
 Specify the number of iterations per profiled function.
 
-#### json `boolean`
+##### json `boolean`
 
 **default:** `false`
 
 If set to true, a [JSONReporter](../lib/reporter/json/index.js) is attached, writing profile results to the console in JSON format.
 
-#### list `boolean`
-
-**default:** `false`
-
-Makes the call to `jsperformance` resolve with an array of available profiles without executing them.
-
-```javascript
-jsperformance({
-  list: true
-}).then((profiles) => {
-  console.log(profiles);
-});
-```
-
-#### magnitude `int`
+##### magnitude `int`
 
 **default:** `1000`
 
 Specify the magnitude of test data, i.e. the number of items to supply to each profiled function.
 
-#### precision `int`
+##### precision `int`
 
 **default:** 4
 
 Specify the number of decimal places to output for results.
 
-#### profiles `Array<string>`
+##### profiles `Array<string>`
 
 **default:** `undefined`
 
 If specified, only profiles with the names provided are executed.
 
 ```javascript
-jsperformance({
+jsperformance.run({
   profiles: [
     'recursion',
     'loops'
@@ -87,7 +93,7 @@ jsperformance({
 });
 ```
 
-#### unit `string`
+##### unit `string`
 
 **default:** `auto`
 
@@ -99,7 +105,7 @@ Specify the unit to use for time output. Possible values are:
 
 Use the constants found in [units](../lib/support/units/index.js).
 
-#### verbosity `int`
+##### verbosity `int`
 
 **default:** `1`
 

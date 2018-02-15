@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
@@ -48,17 +46,16 @@ if ('json' in opts.options) {
 }
 
 if ('list' in opts.options) {
-  options.list = true;
-  return jsperformance(options)
-    .then((profileList) => {
-      if (options.json) {
-        console.info(JSON.stringify(profileList, null, 2));
-      } else {
-        profileList.forEach((profile) => {
-          console.info(`${chalk.bold.underline(profile.name)}\n${profile.description}`);
-        });
-      }
+  const profileList = jsperformance.list(options.verbosity);
+  if (options.json) {
+    console.info(JSON.stringify(profileList, null, 2));
+  } else {
+    profileList.forEach((profile) => {
+      console.info(`${chalk.bold.underline(profile.name)}\n${profile.description}`);
     });
+  }
+
+  process.exit(0);
 }
 
 if ('iterations' in opts.options
@@ -85,7 +82,7 @@ if (opts.argv.length > 0) {
   options.profiles = opts.argv;
 }
 
-jsperformance(options)
+jsperformance.run(options)
   .catch((err) => {
     console.error(err.stack);
     process.exit(1);

@@ -23,7 +23,7 @@ For further information please refer to the [CLI documentation](docs/cli.md).
 const jsperformance = require('js-performance');
 
 // 2. Run the profiler
-jsperformance()
+jsperformance.run()
   .then((report) => {
     console.log(JSON.stringify(report, null, 2));
   });
