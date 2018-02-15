@@ -22,13 +22,13 @@ Calling `jsperformance()` returns a `Promise` which resolves with either the pro
 
 ### Options
 
-The library provides analogous options to the [CLI](docs/cli.md).
+The library provides analogous options to the [CLI](cli.md).
 
 #### console `boolean`
 
 **default:** `false`
 
-If set to true, a [ConsoleReporter](lib/reporter/console/index.js) is attached, writing profile results to the console.
+If set to true, a [ConsoleReporter](../lib/reporter/console/index.js) is attached, writing profile results to the console.
 
 #### iterations `int`
 
@@ -40,7 +40,7 @@ Specify the number of iterations per profiled function.
 
 **default:** `false`
 
-If set to true, a [JSONReporter](lib/reporter/json/index.js) is attached, writing profile results to the console in JSON format.
+If set to true, a [JSONReporter](../lib/reporter/json/index.js) is attached, writing profile results to the console in JSON format.
 
 #### list `boolean`
 
@@ -95,7 +95,7 @@ Specify the unit to use for time output. Possible values are:
 * `ms`    Milliseconds
 * `µs`    Microseconds
 
-Use the constants found in [units](lib/support/units/index.js).
+Use the constants found in [units](../lib/support/units/index.js).
 
 #### verbosity `int`
 
@@ -107,5 +107,5 @@ Set output verbosity. Possible values are:
 * `1` Normal. Output name, description and result of profiled functions.
 * `2` Verbose. Output verbose data.
 
-Use the constants found in [verbosity](lib/support/verbosity/index.js);
+Use the constants found in [verbosity](../lib/support/verbosity/index.js);
 
