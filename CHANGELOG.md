@@ -1,3 +1,6 @@
+### 1.12.0
+* [#28: Output minimum, maximum, average runtime for each test.](https://github.com/haensl/js-performance/issues/28)
+
 ### 1.11.0
 * [#46: Create npm module and binary.](https://github.com/haensl/js-performance/issues/46)
 * [#47: List option should respect output format.](https://github.com/haensl/js-performance/issues/47)
