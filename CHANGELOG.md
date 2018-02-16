@@ -1,3 +1,9 @@
+### 1.11.0
+* [#46: Create npm module and binary.](https://github.com/haensl/js-performance/issues/46)
+* [#47: List option should respect output format.](https://github.com/haensl/js-performance/issues/47)
+* Add option to specify unit.
+* Add documentation.
+
 ### 1.10.0
 * [#11: Add profiles to compare Map vs. object literal.](https://github.com/haensl/js-performance/issues/11)
 

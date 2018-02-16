@@ -1,8 +1,11 @@
 {
   "name": "js-performance",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
-  "main": "js-performance.js",
+  "main": "./lib/index.js",
+  "bin": {
+    "js-performance": "./js-performance.js"
+  },
   "scripts": {
     "start": "node js-performance.js",
     "test": "mocha spec.setup.js '**/*.spec.js'",
@@ -39,8 +42,8 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0"
   },
-  "engines" : {
-    "node" : ">=6.9.5"
+  "engines": {
+    "node": ">=6.9.5"
   },
   "repository": {
     "type": "git",
@@ -49,8 +52,5 @@
   "bugs": {
     "url": "https://github.com/haensl/js-performance/issues"
   },
-  "homepage": "https://github.com/haensl/js-performance#readme",
-  "bin": {
-    "js-performance": "./js-performance.js"
-  }
+  "homepage": "https://github.com/haensl/js-performance#readme"
 }
