@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --expose-gc
 
 const glob = require('glob');
 const join = require('path').join;
@@ -17,9 +17,10 @@ const opts = new GetOpt([
     ['j', 'json', `Output results in JSON format.`],
     ['l', 'list', 'List available profiles.'],
     ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.magnitude}.`],
+    ['', 'memory', 'If present, memory consumption is measured.'],
     ['p', 'precision=', `Specify the precision in terms of decimal places of results. Default: ${DEFAULTS.precision} decimals.`],
     ['q', 'quiet', 'Print results only.'],
-    ['u', 'unit=', `Specify the unit for time output. Default: ${DEFAULTS.unit}. Possible values: auto (automatically convert between milli- and microseconds), ms (milliseconds), µs (microseconds)`],
+    ['u', 'unit=', `Specify the unit for time output. Default: ${DEFAULTS.unit}. Possible values: auto (automatically convert between milli- and microseconds), ms (milliseconds), µs (microseconds), B (Bytes), KB (kilobytes), MB (megabytes). Separate time and memory unit by comma.`],
     ['v', 'verbose', 'Print verbose information.']
   ]).setHelp(
     'Usage: js-performance [OPTIONS] [profile1 profile2 ...]\n\n' +
@@ -68,14 +69,32 @@ if ('magnitude' in opts.options
   options.magnitude = parseInt(opts.options.magnitude, 10);
 }
 
-if ('precision' in opts.options
-  && !isNaN(parseInt(opts.options.precision, 10))) {
-  options.precision = parseInt(opts.options.precision, 10);
+if ('precision' in opts.options) {
+  const precision = opts.options.precision.split(',');
+  if (!isNaN(parseInt(precision[0], 10))) {
+    options.precision.time = precision[0];
+  }
+
+  if (precision.length > 1
+    && !isNaN(parseInt(precision[1], 10))) {
+    options.precision.memory = precision[1];
+  }
 }
 
-if ('unit' in opts.options
-  && UNITS.isValidUnit(opts.options.unit)) {
-  options.unit = opts.options.unit;
+if ('unit' in opts.options) {
+  const units = opts.options.unit.split(',');
+  if (UNITS.isValidUnit(units[0])) {
+    options.units.time = units[0];
+  }
+  
+  if (units.length > 1
+    && UNITS.isValidUnit(units[1])) {
+    options.units.memory = units[1];
+  }
+}
+
+if ('memory' in opts.options) {
+  options.memory = true;
 }
 
 if (opts.argv.length > 0) {

@@ -1,3 +1,10 @@
+### 1.13.0
+* [#30: Measure memory consumption.](https://github.com/haensl/js-performance/issues/30)
+* Refactor function execution and profiling into profiler module.
+* Add units for memory measurement.
+* Enable precision option to distinguish between time and memory precision.
+* Enable unit option to distinguish between time and memory unit.
+
 ### 1.12.0
 * [#31: Minimize pollution for accurate measurements.](https://github.com/haensl/js-performance/issues/31)
 * Adjust clock handling.
