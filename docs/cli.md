@@ -2,8 +2,10 @@
 
 ## CLI
 
+### Synopsis
+
 ```bash
-Usage: js-performance.js [options] [<profile1> <profile2> ...]
+js-performance [options] [<profile1> <profile2> ...]
 
 Parameters:
   <profile1> <profile2> ...
@@ -79,7 +81,7 @@ js-performance loops recursion
 --iterations=<iterations>
 ```
 
-**default:** 1000
+**default:** `1000`
 
 Example:
 
@@ -95,7 +97,7 @@ js-performance --iterations=100
 --magnitude=<magnitude>
 ```
 
-**default:** 1000
+**default:** `1000`
 
 Example:
 
@@ -120,7 +122,7 @@ js-performance --memory
 --precision=<time-precision>,<memory-precision>
 ```
 
-**default:** 4,4
+**default:** `4,4`
 
 Example:
 
@@ -136,7 +138,7 @@ js-performance --precision=2,10 # time: 2 decimals, memory: 10 decimals
 --unit=<time-unit>,<memory-unit>
 ```
 
-**default:** auto,auto
+**default:** `auto,auto`
 
 Example:
 
