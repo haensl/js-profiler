@@ -1,3 +1,9 @@
+### 1.12.0
+* [#31: Minimize pollution for accurate measurements.](https://github.com/haensl/js-performance/issues/31)
+* Adjust clock handling.
+* Move high resolution time conversion to units module.
+* Fix pollution in guards profile.
+
 ### 1.11.0
 * [#46: Create npm module and binary.](https://github.com/haensl/js-performance/issues/46)
 * [#47: List option should respect output format.](https://github.com/haensl/js-performance/issues/47)
