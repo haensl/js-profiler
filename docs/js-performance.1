@@ -1,4 +1,6 @@
-.TH js-performance 1 "17 February 2018" "v1.12.0"
+." vim: set syn=nroff
+.TH js-performance 1 "February 2018" "js-performance v1.12.0"
+
 .SH NAME
 js-performance - A JavaScript profiling tool and collection of profiling modules and benchmarks.
 
@@ -8,10 +10,88 @@ js-performance  [-hjlqv]
                 [\fI\,profile1\fR \fI\,profile2\fR ...]
 
 .SH DESCRIPTION
+\fI\,js-performance\fR is a profiling tool and collection of profiling modules and benchmarks. It provides both a CLI and a JavaScript library for use within custom applications.
+
+.SH COMMANDS
+\fI\,js-performance\fR supports two distinct commands.
+
+If run with the \fB\,-l\fR or \fB\,--list\fR option, a list of available performance profiles is printed to the terminal.
+
+If run without this option, either all available performance profiles or the ones specified after the command are executed and results printed to the terminal.
+
+.SH ARGUMENTS
+To run only specific profiles provide them as arguments separated by spaces. e.g.:
+.PP
+.nf
+.RS
+js-performance guards loops
+.RE
+.fi
+.PP
+To retrieve a list of available profiles, see the \fI\,--list\fR option.
 
 .SH OPTIONS
+-h, --help
+.RS
+display usage information.
+.RE
+
+-i \fI\,iterations\fR, --iterations=\fI\,iterations\fR
+.RS
+set the number of iterations per profiled function, i.e. how often each profiled function is executed.
+.RE
+
+-j, --json
+.RS
+output results in JSON format.
+.RE
+
+-l, --list
+.RS
+print a list of available performance profiles.
+.RE
+
+-m \fI\,magnitude\fR, --magnitude=\fI\,magnitude\fR
+.RS
+set the magnitude of test data provided to each profiled function, i.e. how many items each function has to process.
+.RE
+
+-p \fI\,precision\fR, --precision=\fI\,precision\fR
+.RS
+set the floating point precision to use for results, i.e. the number of decimal places to use for results.
+.RE
+
+-u \fI\,unit\fR, --unit=\fI\,unit\fR
+.RS
+set the unit used for result timings.
+
+Available units:
+.RS
+.IP auto .2i
+automatically convert between milli- and microseconds. DEFAULT
+.IP ms
+milliseconds
+.IP \[u03BC]s
+microseconds. ATTENTION: the first letter is an actual mu.
+.RE
+.RE
+
+-q, --quiet
+.RS
+print results only.
+.RE
+
+-v, --verbose
+.RS
+print verbose output.
+.RE
+
+.SH LIBRARY
+Refer to <https://github.com/haensl/js-performance/blob/master/docs/lib.md> for information on how to use the js-performance library in your own applications.
 
 .SH BUGS
+Report bugs to <https://github.com/haensl/js-performance/issues>
 
 .SH AUTHOR
+Written by Hans-Peter Dietz and Fabian Maschewski.
 

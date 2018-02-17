@@ -1,3 +1,7 @@
+### 1.12.0
+* [#49: Add man page.](https://github.com/haensl/js-performance/issues/49)
+* Update dependencies to fix security vulnerability in brace-expansion < 1.1.7
+
 ### 1.11.0
 * [#46: Create npm module and binary.](https://github.com/haensl/js-performance/issues/46)
 * [#47: List option should respect output format.](https://github.com/haensl/js-performance/issues/47)
