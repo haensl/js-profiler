@@ -1,3 +1,7 @@
+### 1.13.0
+* [#49: Add man page.](https://github.com/haensl/js-performance/issues/49)
+* Update dependencies to fix security vulnerability in brace-expansion < 1.1.7
+
 ### 1.12.0
 * [#28: Output minimum, maximum, average runtime for each test.](https://github.com/haensl/js-performance/issues/28)
 
