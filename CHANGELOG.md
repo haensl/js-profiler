@@ -1,15 +1,22 @@
-### 1.13.0
+### 1.15.0
 * [#30: Measure memory consumption.](https://github.com/haensl/js-performance/issues/30)
 * Refactor function execution and profiling into profiler module.
 * Add units for memory measurement.
 * Enable precision option to distinguish between time and memory precision.
 * Enable unit option to distinguish between time and memory unit.
 
-### 1.12.0
+### 1.14.0
 * [#31: Minimize pollution for accurate measurements.](https://github.com/haensl/js-performance/issues/31)
 * Adjust clock handling.
 * Move high resolution time conversion to units module.
 * Fix pollution in guards profile.
+
+### 1.13.0
+* [#49: Add man page.](https://github.com/haensl/js-performance/issues/49)
+* Update dependencies to fix security vulnerability in brace-expansion < 1.1.7
+
+### 1.12.0
+* [#28: Output minimum, maximum, average runtime for each test.](https://github.com/haensl/js-performance/issues/28)
 
 ### 1.11.0
 * [#46: Create npm module and binary.](https://github.com/haensl/js-performance/issues/46)
