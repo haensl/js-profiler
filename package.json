@@ -1,6 +1,6 @@
 {
   "name": "js-performance",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "./lib/index.js",
   "man": "./docs/js-performance.1.gz",
