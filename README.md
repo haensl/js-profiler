@@ -1,6 +1,8 @@
-# JS Performance
+# JS-Performance
 
 JavaScript profiling tool and collection of profiling modules and benchmarks.
+
+JS-Performance allows you to compare different methods and functions regarding execution speed and memory consumption.
 
 ## Installation
 

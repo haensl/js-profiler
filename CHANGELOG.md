@@ -1,3 +1,6 @@
+### 1.17.0
+* [#55: Publish node/v8 and package version in results.](https://github.com/haensl/js-performance/issues/55)
+
 ### 1.16.0
 * [#54: Add npmignore.](https://github.com/haensl/js-performance/issues/54)
 
