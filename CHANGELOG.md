@@ -1,3 +1,6 @@
+### 1.16.0
+* [#54: Add npmignore.](https://github.com/haensl/js-performance/issues/54)
+
 ### 1.15.0
 * [#30: Measure memory consumption.](https://github.com/haensl/js-performance/issues/30)
 * Refactor function execution and profiling into profiler module.
