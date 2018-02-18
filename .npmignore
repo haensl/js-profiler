@@ -1,0 +1,9 @@
+docs/js-performance.1
+.travis.yml
+.eslintrc
+.gitignore
+intro.mov
+intro.gif
+CHANGELOG.md
+**/*.spec.js
+
