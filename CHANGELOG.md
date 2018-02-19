@@ -1,3 +1,6 @@
+### 1.17.1
+* [#59: Update readme.](https://github.com/haensl/js-performance/issues/59)
+
 ### 1.17.0
 * [#55: Publish node/v8 and package version in results.](https://github.com/haensl/js-performance/issues/55)
 
