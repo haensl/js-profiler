@@ -72,7 +72,7 @@ if ('list' in opts.options) {
         case VERBOSITY.NORMAL:
           return `${chalk.bold.underline(profile.name)}: ${profile.description.short}`;
       }
-    }).filter((p) => typeof p === 'object').join('\n\n'));
+    }).filter((p) => typeof p === 'string').join('\n\n'));
   }
 
   process.exit(0);
