@@ -47,13 +47,32 @@ if ('json' in opts.options) {
 }
 
 if ('list' in opts.options) {
-  const profileList = jsperformance.list(options.verbosity);
+  const profileList = jsperformance.list();
   if (options.json) {
-    console.info(JSON.stringify(profileList, null, 2));
+    console.info(JSON.stringify(profileList.map((p) => {
+      switch(options.verbosity) {
+        case VERBOSITY.VERBOSE:
+          return Object.assign({}, p, { description: p.description.long });
+        case VERBOSITY.NORMAL:
+          return {
+            name: p.name,
+            description: p.description.short
+          };
+      }
+    }).filter((p) => typeof p === 'object'), null, 2));
   } else {
-    profileList.forEach((profile) => {
-      console.info(`${chalk.bold.underline(profile.name)}\n${profile.description}`);
-    });
+    console.info(profileList.map((profile) => {
+      switch (options.verbosity) {
+        case VERBOSITY.VERBOSE:
+          return `${chalk.bold.underline(profile.name)}\n` +
+            `${profile.description.long}\n` +
+            `Profiled functions:\n` +
+            `${profile.functions.map((f) => `  ${f}`)
+              .join('\n')}`
+        case VERBOSITY.NORMAL:
+          return `${chalk.bold.underline(profile.name)}: ${profile.description.short}`;
+      }
+    }).filter((p) => typeof p === 'string').join('\n\n'));
   }
 
   process.exit(0);
