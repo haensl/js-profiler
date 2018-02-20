@@ -70,9 +70,20 @@ If set to true, a [JSONReporter](../lib/reporter/json/index.js) is attached, wri
 
 Specify the magnitude of test data, i.e. the number of items to supply to each profiled function.
 
-##### precision `int`
+##### memory `boolean`
 
-**default:** 4
+**default:** `false`
+
+If set to true, memory consumption is measured and reported.
+
+**ATTENTION:** Enabling memory reporting significantly slows down profile execution.
+
+##### precision `object`
+
+**default:** `{
+  time: 4,
+  memory: 4
+}`
 
 Specify the number of decimal places to output for results.
 
@@ -93,15 +104,21 @@ jsperformance.run({
 });
 ```
 
-##### unit `string`
+##### units `object`
 
-**default:** `auto`
+**default:** `{
+  time: 'auto',
+  memory: 'auto'
+}`
 
 Specify the unit to use for time output. Possible values are:
 
-* `auto`  Automatically convert between milli- and microseconds where appropriate.
+* `auto`  Automatically convert between units where appropriate.
 * `ms`    Milliseconds
 * `µs`    Microseconds
+* `B`     Byte
+* `KB`    Kilobyte
+* `MB`    Megabyte
 
 Use the constants found in [units](../lib/support/units/index.js).
 

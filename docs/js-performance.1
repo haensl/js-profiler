@@ -1,12 +1,12 @@
 ." vim: set syn=nroff
-.TH js-performance 1 "February 2018" "js-performance v1.17.1"
+.TH js-performance 1 "February 2018" "js-performance v1.17.2"
 
 .SH NAME
 js-performance - A JavaScript profiling tool and collection of profiling modules and benchmarks.
 
 .SH SYNOPSIS
 js-performance  [-hjlqv]
-                [-i \fI\,iterations\fR] [-m \fI\,magnitude\fR] [-p \fI\,precision\fR] [-u \fI\,unit\fR]
+                [-i \fI\,iterations\fR] [-m \fI\,magnitude\fR] [-p \fI\,time-precision,memory-precision\fR] [-u \fI\,time-unit,memory-unit\fR]
                 [\fI\,profile1\fR \fI\,profile2\fR ...]
 
 .SH DESCRIPTION
@@ -38,7 +38,7 @@ display usage information.
 
 -i \fI\,iterations\fR, --iterations=\fI\,iterations\fR
 .RS
-set the number of iterations per profiled function, i.e. how often each profiled function is executed.
+set the number of iterations per profiled function, i.e. how often each profiled function is executed. DEFAULT: 1000
 .RE
 
 -j, --json
@@ -53,17 +53,17 @@ print a list of available performance profiles.
 
 -m \fI\,magnitude\fR, --magnitude=\fI\,magnitude\fR
 .RS
-set the magnitude of test data provided to each profiled function, i.e. how many items each function has to process.
+set the magnitude of test data provided to each profiled function, i.e. how many items each function has to process. DEFAULT: 1000
 .RE
 
--p \fI\,precision\fR, --precision=\fI\,precision\fR
+-p \fI\,time-precision,memory-precision\fR, --precision=\fI\,time-precision,memory-precision\fR
 .RS
-set the floating point precision to use for results, i.e. the number of decimal places to use for results.
+set the floating point precision to use for results, i.e. the number of decimal places to use for time and memory output. Separate time and memory precision by comma. DEFAULT: 4
 .RE
 
--u \fI\,unit\fR, --unit=\fI\,unit\fR
+-u \fI\,time-unit,memory-unit\fR, --unit=\fI\,time-unit,memory-unit\fR
 .RS
-set the unit used for result timings.
+set the unit used for results. Separate time and memory unit by comma.
 
 Available units:
 .RS
@@ -73,6 +73,13 @@ automatically convert between milli- and microseconds. DEFAULT
 milliseconds
 .IP \[u03BC]s
 microseconds. ATTENTION: the first letter is an actual mu.
+.IP B
+.br
+Byte
+.IP KB
+Kilobyte
+.IP MB
+Megabyte
 .RE
 .RE
 

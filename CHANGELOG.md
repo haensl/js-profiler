@@ -1,3 +1,6 @@
+### 1.17.2
+* [#59: Update readme.](https://github.com/haensl/js-performance/issues/59)
+
 ### 1.17.1
 * [#24: Handling VERBOSITY in profiles is like inline styles.](https://github.com/haensl/js-performance/issues/24)
 
