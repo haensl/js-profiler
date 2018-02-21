@@ -65,15 +65,15 @@ Profiled functions:
 Object literal vs. Map: retrieving values.
 
 Profiled functions:
-  `Map.get()`
-  `{}.prop`
+  * `Map.get()`
+  * `{}.prop`
 
 ##### map:creation
 Object literal vs. Map: creating a map.
 
 Profiled functions:
-  `Map.set()`
-  `{}.prop =`
+  * `Map.set()`
+  * `{}.prop =`
 
 ##### recursion
 Recurstion variations: Calculating sum of array of integers. Profile contains a simple for-loop for reference.

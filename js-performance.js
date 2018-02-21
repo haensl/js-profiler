@@ -4,12 +4,10 @@ const glob = require('glob');
 const join = require('path').join;
 const GetOpt = require('node-getopt');
 const chalk = require('chalk');
-const appRoot = __dirname;
-global.requireModule = (module) => require(join(appRoot, module));
-const DEFAULTS = requireModule('lib/support/defaults');
-const VERBOSITY = requireModule('lib/support/verbosity');
-const UNITS = requireModule('lib/support/units');
-const jsperformance = requireModule('lib');
+const DEFAULTS = require('./lib/support/defaults');
+const VERBOSITY = require('./lib/support/verbosity');
+const UNITS = require('./lib/support/units');
+const jsperformance = require('./lib');
 
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],

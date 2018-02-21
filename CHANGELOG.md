@@ -1,3 +1,6 @@
+### 1.17.3
+* [#62: Remove global `requireModule()`](https://github.com/haensl/js-performance/issues/62)
+
 ### 1.17.2
 * [#59: Update readme.](https://github.com/haensl/js-performance/issues/59)
 

@@ -1,6 +1,6 @@
 {
   "name": "js-performance",
-  "version": "1.17.2",
+  "version": "1.17.3",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "./lib/index.js",
   "man": "./docs/js-performance.1.gz",
@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "node js-performance.js",
-    "test": "mocha spec.setup.js '**/*.spec.js'",
-    "tdd": "mocha --recursive --watch spec.setup.js '**/*.spec.js'",
+    "test": "mocha '**/*.spec.js'",
+    "tdd": "mocha --recursive --watch '**/*.spec.js'",
     "lint": "eslint **/*.js"
   },
   "keywords": [
