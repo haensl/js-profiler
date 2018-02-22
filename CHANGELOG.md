@@ -1,3 +1,6 @@
+### 1.18.1
+* [#67: Update intro.](https://github.com/haensl/js-profiler/issues/67)
+
 ### 1.18.0
 * [#65: Rename to js-profiler.](https://github.com/haensl/js-performance/issues/65)
 
