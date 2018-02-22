@@ -4,7 +4,7 @@
 
 ```javascript
 // 1. Import the library
-const jsProriler = require('js-profiler');
+const jsProfiler = require('js-profiler');
 
 // 2. Configure js-profiler
 const options = {
