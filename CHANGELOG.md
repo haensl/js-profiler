@@ -1,3 +1,6 @@
+### 1.18.0
+* [#65: Rename to js-profiler.](https://github.com/haensl/js-performance/issues/65)
+
 ### 1.17.3
 * [#62: Remove global `requireModule()`](https://github.com/haensl/js-performance/issues/62)
 

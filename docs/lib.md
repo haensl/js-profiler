@@ -1,12 +1,12 @@
-# JS Performance
+# JS-Profiler
 
 ## Library
 
 ```javascript
 // 1. Import the library
-const jsperformance = require('js-performance');
+const jsProriler = require('js-profiler');
 
-// 2. Configure js-performance
+// 2. Configure js-profiler
 const options = {
   json: true,
   precision: 2,
@@ -14,13 +14,13 @@ const options = {
 };
 
 // 3. Run the profiler
-jsperformance.run(options)
+jsProfiler.run(options)
   .then((report) => {
     console.log(JSON.stringify(report, null, 2));
   });
 ```
 
-The `js-performance` module exports an object providing two functions:
+The `js-profiler` module exports an object providing two functions:
 
 ### `list(verbosity) => Array<object>`
 

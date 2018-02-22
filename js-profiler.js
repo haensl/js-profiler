@@ -7,7 +7,7 @@ const chalk = require('chalk');
 const DEFAULTS = require('./lib/support/defaults');
 const VERBOSITY = require('./lib/support/verbosity');
 const UNITS = require('./lib/support/units');
-const jsperformance = require('./lib');
+const jsProfiler = require('./lib');
 
 const opts = new GetOpt([
     ['h', 'help', 'Display this helptext.'],
@@ -21,7 +21,7 @@ const opts = new GetOpt([
     ['u', 'unit=', `Specify the unit for time and memory output. Default: ${DEFAULTS.units.time},${DEFAULTS.units.memory}. Possible values: auto (automatically convert between milli- and microseconds), ms (milliseconds), µs (microseconds), B (Bytes), KB (kilobytes), MB (megabytes). Separate time and memory unit by comma.`],
     ['v', 'verbose', 'Print verbose information.']
   ]).setHelp(
-    'Usage: js-performance [OPTIONS] [profile1 profile2 ...]\n\n' +
+    'Usage: js-profiler [OPTIONS] [profile1 profile2 ...]\n\n' +
     'Parameters:\n' +
     '  profile1 profile2 ...\n' +
     '  Optionally specify the profiles you want to run separated by spaces.\n\n' +
@@ -45,7 +45,7 @@ if ('json' in opts.options) {
 }
 
 if ('list' in opts.options) {
-  const profileList = jsperformance.list();
+  const profileList = jsProfiler.list();
   if (options.json) {
     console.info(JSON.stringify(profileList.map((p) => {
       switch(options.verbosity) {
@@ -134,7 +134,7 @@ if (opts.argv.length > 0) {
   options.profiles = opts.argv;
 }
 
-jsperformance.run(options)
+jsProfiler.run(options)
   .catch((err) => {
     console.error(err.stack);
     process.exit(1);

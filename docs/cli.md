@@ -1,11 +1,11 @@
-# JS Performance
+# JS-Profiler
 
 ## CLI
 
 ### Synopsis
 
 ```bash
-js-performance [options] [<profile1> <profile2> ...]
+js-profiler [options] [<profile1> <profile2> ...]
 
 Parameters:
   <profile1> <profile2> ...
@@ -53,25 +53,25 @@ Options:
 ### Getting help
 
 ```bash
-js-performance -h
-js-performance --help
+js-profiler -h
+js-profiler --help
 ```
 
 ### Listing available performance profiles
 
 ```bash
-js-performance -l
-js-performance --list
+js-profiler -l
+js-profiler --list
 ```
 
 ### Running specific profiles
 
-To run specific profiles simply supply their names separated by spaces when starting `js-performance`:
+To run specific profiles simply supply their names separated by spaces when starting `js-profiler`:
 
 ```bash
-js-performance loops
-js-performance recursion
-js-performance loops recursion
+js-profiler loops
+js-profiler recursion
+js-profiler loops recursion
 ```
 
 ### Setting the number of iterations per profiled function
@@ -86,8 +86,8 @@ js-performance loops recursion
 Example:
 
 ```bash
-js-performance -i 100
-js-performance --iterations=100
+js-profiler -i 100
+js-profiler --iterations=100
 ```
 
 ### Setting the magnitude of test data provided to the profiled functions
@@ -102,14 +102,14 @@ js-performance --iterations=100
 Example:
 
 ```bash
-js-performance -m 100
-js-performance --magnitude=100
+js-profiler -m 100
+js-profiler --magnitude=100
   ```
 
 ### Enable measurement of memory consumption
 
 ```bash
-js-performance --memory
+js-profiler --memory
 ```
 
 **Attention:** Enabling measurement of memory consumption has significant effect on profiling runtime.
@@ -127,8 +127,8 @@ js-performance --memory
 Example:
 
 ```bash
-js-performance -p 2 # time: 2 decimals, memory: default
-js-performance --precision=2,10 # time: 2 decimals, memory: 10 decimals
+js-profiler -p 2 # time: 2 decimals, memory: default
+js-profiler --precision=2,10 # time: 2 decimals, memory: 10 decimals
 ```
 
 ### Setting units
@@ -143,8 +143,8 @@ js-performance --precision=2,10 # time: 2 decimals, memory: 10 decimals
 Example:
 
 ```bash
-js-performance -u ms # time: milliseconds, memory: default
-js-performance --unit=ms,KB # time milliseconds, memory: kilobyte
+js-profiler -u ms # time: milliseconds, memory: default
+js-profiler --unit=ms,KB # time milliseconds, memory: kilobyte
 ```
 
 available units:
@@ -161,20 +161,20 @@ available units:
 To print verbose output:
 
 ```bash
-js-performance -v
-js-performance --verbose
+js-profiler -v
+js-profiler --verbose
 ```
 
 To print results only:
 
 ```bash
-js-performance -q
-js-performance --quiet
+js-profiler -q
+js-profiler --quiet
 ```
 
 ### Report in JSON format
 
 ```bash
-js-performance -j
-js-performance --json
+js-profiler -j
+js-profiler --json
 ```
