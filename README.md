@@ -1,19 +1,22 @@
-# JS-Performance
+# JS-Profiler
 
 JavaScript profiling tool and library of profiling modules and benchmarks.
 
-JS-Performance allows you to compare different techniques and functions regarding execution speed and memory consumption. It reports results either in text or JSON format.
+JS-Profiler allows you to compare different techniques and functions regarding execution speed and memory consumption. It reports results either in text or JSON format.
 
+[![NPM](https://nodei.co/npm/js-profiler.png?downloads=true)](https://nodei.co/npm/js-profiler/)
+
+[![Build Status](https://travis-ci.org/haensl/js-profiler.svg?branch=master)](https://travis-ci.org/haensl/js-profiler)
 
 ## Installation
 
-`npm i [-g] js-performance`
+`npm i [-g] js-profiler`
 
 ## Usage
 
 ### CLI
 
-If installed with the `-g` flag you can simply run js-performance from your command line:
+If installed with the `-g` flag you can simply run js-profiler from your command line:
 
 ![Intro](intro.gif)
 
@@ -23,10 +26,10 @@ For further information please refer to the [CLI documentation](docs/cli.md) and
 
 ```javascript
 // 1. Import the library
-const jsperformance = require('js-performance');
+const jsProfiler = require('js-profiler');
 
 // 2. Run the profiler
-jsperformance.run()
+jsProfiler.run()
   .then((report) => {
     console.log(JSON.stringify(report, null, 2));
   });

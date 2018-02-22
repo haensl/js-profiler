@@ -1,19 +1,19 @@
 ." vim: set syn=nroff
-.TH js-performance 1 "February 2018" "js-performance v1.17.3"
+.TH js-profiler 1 "February 2018" "js-profiler v1.18.0"
 
 .SH NAME
-js-performance - A JavaScript profiling tool and collection of profiling modules and benchmarks.
+js-profiler - A JavaScript profiling tool and collection of profiling modules and benchmarks.
 
 .SH SYNOPSIS
-js-performance  [-hjlqv]
+js-profiler  [-hjlqv]
                 [-i \fI\,iterations\fR] [-m \fI\,magnitude\fR] [-p \fI\,time-precision,memory-precision\fR] [-u \fI\,time-unit,memory-unit\fR]
                 [\fI\,profile1\fR \fI\,profile2\fR ...]
 
 .SH DESCRIPTION
-\fI\,js-performance\fR is a profiling tool and collection of profiling modules and benchmarks. It provides both a CLI and a JavaScript library for use within custom applications.
+\fI\,js-profiler\fR is a profiling tool and collection of profiling modules and benchmarks. It provides both a CLI and a JavaScript library for use within custom applications.
 
 .SH COMMANDS
-\fI\,js-performance\fR supports two distinct commands.
+\fI\,js-profiler\fR supports two distinct commands.
 
 If run with the \fB\,-l\fR or \fB\,--list\fR option, a list of available performance profiles is printed to the terminal.
 
@@ -24,7 +24,7 @@ To run only specific profiles provide them as arguments separated by spaces. e.g
 .PP
 .nf
 .RS
-js-performance guards loops
+js-profiler guards loops
 .RE
 .fi
 .PP
@@ -94,10 +94,10 @@ print verbose output.
 .RE
 
 .SH LIBRARY
-Refer to <https://github.com/haensl/js-performance/blob/master/docs/lib.md> for information on how to use the js-performance library in your own applications.
+Refer to <https://github.com/haensl/js-profiler/blob/master/docs/lib.md> for information on how to use the js-profiler library in your own applications.
 
 .SH BUGS
-Report bugs to <https://github.com/haensl/js-performance/issues>
+Report bugs to <https://github.com/haensl/js-profiler/issues>
 
 .SH AUTHOR
 Written by Hans-Peter Dietz and Fabian Maschewski.
