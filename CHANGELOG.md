@@ -1,3 +1,6 @@
+### 1.20.0
+* [#74: Add do-while tests to loops profile.](https://github.com/haensl/js-profiler/issues/74)
+
 ### 1.19.0
 * [#70: Integrate CD.](https://github.com/haensl/js-profiler/issues/70)
 * Add for-of loop.
