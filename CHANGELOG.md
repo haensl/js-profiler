@@ -1,5 +1,6 @@
 ### 1.19.0
 * [#70: Integrate CD.](https://github.com/haensl/js-profiler/issues/70)
+* Add for-of loop.
 
 ### 1.18.2
 * [#71: Update dependencies.](https://github.com/haensl/js-profiler/issues/71)
