@@ -1,3 +1,6 @@
+### 1.18.2
+* [#71: Update dependencies.](https://github.com/haensl/js-profiler/issues/71)
+
 ### 1.18.1
 * [#67: Update intro.](https://github.com/haensl/js-profiler/issues/67)
 
