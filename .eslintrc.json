@@ -1,0 +1,16 @@
+{
+  "extends": "@haensl",
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script",
+    "impliedStrict": false
+  },
+  "globals": {
+    "requireModule": false
+  }
+}
