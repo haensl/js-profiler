@@ -1,3 +1,6 @@
+### 1.21.0
+* [#76: Add a profile for comparison operators.](https://github.com/haensl/js-profiler/issues/76)
+
 ### 1.20.0
 * [#74: Add do-while tests to loops profile.](https://github.com/haensl/js-profiler/issues/74)
 
