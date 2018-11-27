@@ -1,3 +1,22 @@
 language: node_js
 node_js:
-  - "6"
+  - '6'
+  - 'lts/*'
+  - 'node'
+
+stages:
+  - test
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: test
+      script: npm run lint
+    - stage: test
+      script: npm test
+    - stage: deploy
+      deploy:
+        provider: npm
+        api_key: $NPM_API_KEY
+        email: $NPM_MAIL
