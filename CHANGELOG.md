@@ -1,3 +1,6 @@
+### 1.19.0
+* [#79: Compare different array concatenation mechanisms.](https://github.com/haensl/js-profiler/issues/79)
+
 ### 1.18.1
 * [#67: Update intro.](https://github.com/haensl/js-profiler/issues/67)
 
