@@ -1,10 +1,6 @@
 {
   "name": "js-profiler",
-<<<<<<< HEAD
-  "version": "1.19.0",
-=======
-  "version": "1.21.0",
->>>>>>> 3c020272f11120c88e839d03dce2afa8834b9508
+  "version": "1.22.0",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "./lib/index.js",
   "man": "./docs/js-profiler.1.gz",
