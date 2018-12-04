@@ -1,3 +1,6 @@
+### 1.22.0
+* [#79: Compare different array concatenation mechanisms.](https://github.com/haensl/js-profiler/issues/79)
+
 ### 1.21.0
 * [#76: Add a profile for comparison operators.](https://github.com/haensl/js-profiler/issues/76)
 
