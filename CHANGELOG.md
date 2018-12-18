@@ -4,6 +4,7 @@
 
 ### 1.23.0
 * [#81: Add a profile to compare object property iteration.](https://github.com/haensl/js-profiler/issues/81)
+* Lift minimum node.js version to 8.14.0
 
 ### 1.22.0
 * [#79: Compare different array concatenation mechanisms.](https://github.com/haensl/js-profiler/issues/79)
