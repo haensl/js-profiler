@@ -1,3 +1,6 @@
+### 1.24.0
+* [#83: Add Object.defineProperty to object creation profile.](https://github.com/haensl/js-profiler/issues/83)
+
 ### 1.23.0
 * [#81: Add a profile to compare object property iteration.](https://github.com/haensl/js-profiler/issues/81)
 * Lift minimum node.js version to 8.14.0
