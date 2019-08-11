@@ -12,6 +12,126 @@ JS-Profiler allows you to compare different techniques and functions regarding e
 
 `npm i [-g] js-profiler`
 
+## New in version 2 & Migration from v1.x.y to v2.x.y
+* `test.description` now containsa _nice_ human readable description.
+* `test.codeSample` now contains a short pseudo-code sample of the function under test.
+* use `test.code` to access the full source code of the function under test.
+* `test.keywords` contains keywords associated with the function under test.
+
+### Comparison of v2 vs. v1 profile object
+
+#### Version 1.x.y profile object
+
+```javascript
+// v1
+{
+  "name" : "recursion",
+  "description" : "Recursion variations: Calculating sum of array of integers. Profile contains a simple for-loop for reference.",
+  "tests" : [
+      {
+          "description" : "for loop sum for reference",
+          "time" : {
+              "average" : "1.4923μs",
+              "minimum" : "1.0970μs",
+              "maximum" : "38.8230μs"
+          }
+      }, 
+      {
+          "description" : "recursive sum",
+          "time" : {
+              "average" : "1080.3024μs",
+              "minimum" : "703.3320μs",
+              "maximum" : "10215.1650μs"
+          }
+      }, 
+      {
+          "description" : "tail recursive sum",
+          "time" : {
+              "average" : "1041.0375μs",
+              "minimum" : "704.2790μs",
+              "maximum" : "16476.7110μs"
+          }
+      }
+  ],
+  "fastest" : [
+      {
+          "description" : "for loop sum for reference",
+          "time" : {
+              "average" : "1.4923μs",
+              "minimum" : "1.0970μs",
+              "maximum" : "38.8230μs"
+          }
+      }
+  ]
+}
+```
+
+#### Version 2.x.y profile object
+
+```javascript
+// v2
+{
+  "name": "recursion",
+  "description": "Recursion.",
+  "tests": [
+    {
+      "description": "for loop sum for reference",
+      "keywords": [
+        "for",
+        "loop",
+        "sum"
+      ],
+      "codeSample": "for (...) { sum += d[i] }",
+      "code": "(d) => {\n    let sum = 0;\n    for (let i = 0; i < d.length; i++) {\n      sum += d[i];\n    }\n\n    return sum;\n  }",
+      "time": {
+        "average": "2.8409µs"
+      }
+    },
+    {
+      "description": "recursive sum",
+      "keywords": [
+        "recursion",
+        "sum"
+      ],
+      "codeSample": "const f = (d) => (d && d.length && (d[0] + f(d.slice(1)))) || 0",
+      "code": "(d) => (d && d.length && (d[0] + recursiveSum.f(d.slice(1)))) || 0",
+      "time": {
+        "average": "735.3804µs"
+      }
+    },
+    {
+      "description": "tail recursive sum",
+      "keywords": [
+        "recursion",
+        "sum",
+        "tail",
+        "tailrecursion"
+      ],
+      "codeSample": "const f = (d, i = 0) => (!d.length && i) || f(d.slice(1), i + d[0])",
+      "code": "(d, i = 0) => (!d.length && i)\n    || tailRecursiveSum.f(d.slice(1), i + d[0])",
+      "time": {
+        "average": "683.1078µs"
+      }
+    }
+  ],
+  "fastest": [
+    {
+      "description": "for loop sum for reference",
+      "keywords": [
+        "for",
+        "loop",
+        "sum"
+      ],
+      "codeSample": "for (...) { sum += d[i] }",
+      "code": "(d) => {\n    let sum = 0;\n    for (let i = 0; i < d.length; i++) {\n      sum += d[i];\n    }\n\n    return sum;\n  }",
+      "time": {
+        "average": "2.8409µs"
+      }
+    }
+  ]
+}
+```
+
 ## Usage
 
 ### CLI
