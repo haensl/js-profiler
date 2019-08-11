@@ -11,9 +11,13 @@
     "start": "node js-profiler.js",
     "test": "mocha --recursive \"./{,!(node_modules)/**/}*.spec.js\"",
     "tdd": "mocha --recursive --watch \"./{,!(node_modules)/**/}*.spec.js\"",
-    "lint": "eslint -c ./.eslintrc.json **/*.js",
-    "precommit": "npm run lint && npm test",
-    "prepush": "npm run lint && npm test"
+    "lint": "eslint -c ./.eslintrc.json **/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test",
+      "pre-push": "npm run lint && npm test"
+    }
   },
   "keywords": [
     "Performance",
