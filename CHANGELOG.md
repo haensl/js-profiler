@@ -1,3 +1,17 @@
+### 2.0.0
+* [#86: Add better descriptions to profiles and profile tests.](https://github.com/haensl/js-profiler/issues/86)
+* [#69: Fix outdated docs.](https://github.com/haensl/js-profiler/issues/69)
+* Rename `profile.tests` to `profile.functions`.
+* Add human readable descriptions to profile functions.
+* Add keywords to profile functions.
+* Add codeSample to profile functions.
+* Add strict vs equal comparisons to guards profile.
+* Update dependencies.
+* Add new features and migration guide to readme.
+* Improve profile test descriptions.
+* Add keywords to profiles.
+* Add array support module.
+
 ### 1.24.0
 * [#83: Add Object.defineProperty to object creation profile.](https://github.com/haensl/js-profiler/issues/83)
 
