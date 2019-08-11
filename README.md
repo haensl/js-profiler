@@ -4,7 +4,7 @@ JavaScript profiling tool and library of profiling modules and benchmarks.
 
 JS-Profiler allows you to compare different techniques, operators and functions regarding execution speed and memory consumption. It reports results either in text or JSON format.
 
-JS-Profiler is what powers [https://js-profiler.com](https://js-profiler.com).
+JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 [![NPM](https://nodei.co/npm/js-profiler.png?downloads=true)](https://nodei.co/npm/js-profiler/)
 
