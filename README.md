@@ -1,5 +1,7 @@
 # [JS-Profiler](https://js-profiler.com)
 
+[<img src="https://js-profiler.com/js-profiler-logo.png" alt="https://js-profiler.com" width="100" />](https:/js-profiler.com)
+
 JavaScript profiling tool and library of profiling modules and benchmarks.
 
 JS-Profiler allows you to compare different techniques, operators and functions regarding execution speed and memory consumption. It reports results either in text or JSON format.
