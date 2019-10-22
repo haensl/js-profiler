@@ -1,3 +1,6 @@
+### 1.25.0
+* [#77: Add a profile for comparison statements.](https://github.com/haensl/js-profiler/issues/77)
+
 ### 1.24.0
 * [#83: Add Object.defineProperty to object creation profile.](https://github.com/haensl/js-profiler/issues/83)
 
