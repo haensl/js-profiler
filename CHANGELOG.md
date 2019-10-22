@@ -1,3 +1,6 @@
+### 2.1.0
+* [#77: Add a profile for comparison statements.](https://github.com/haensl/js-profiler/issues/77)
+
 ### 2.0.0
 * [#86: Add better descriptions to profiles and profile tests.](https://github.com/haensl/js-profiler/issues/86)
 * [#69: Fix outdated docs.](https://github.com/haensl/js-profiler/issues/69)

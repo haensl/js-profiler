@@ -1,6 +1,6 @@
 {
   "name": "js-profiler",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "./lib/index.js",
   "man": "./docs/js-profiler.1.gz",
@@ -45,7 +45,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.3",
-    "glob": "^7.1.4",
+    "glob": "^7.1.5",
     "node-getopt": "^0.2.4"
   },
   "devDependencies": {
