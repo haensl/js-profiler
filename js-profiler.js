@@ -1,7 +1,5 @@
 #!/usr/bin/env node --expose-gc
 
-const glob = require('glob');
-const join = require('path').join;
 const GetOpt = require('node-getopt');
 const chalk = require('chalk');
 const DEFAULTS = require('./lib/support/defaults');
@@ -10,24 +8,24 @@ const UNITS = require('./lib/support/units');
 const jsProfiler = require('./lib');
 
 const opts = new GetOpt([
-    ['h', 'help', 'Display this helptext.'],
-    ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
-    ['j', 'json', `Output results in JSON format.`],
-    ['l', 'list', 'List available profiles.'],
-    ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.magnitude}.`],
-    ['', 'memory', 'If present, memory consumption is measured.'],
-    ['p', 'precision=', `Specify the precision in terms of decimal places of results. Default: ${DEFAULTS.precision.time},${DEFAULTS.precision.memory}. Separate time and memory precision by comma.`],
-    ['q', 'quiet', 'Print results only.'],
-    ['u', 'unit=', `Specify the unit for time and memory output. Default: ${DEFAULTS.units.time},${DEFAULTS.units.memory}. Possible values: auto (automatically convert between milli- and microseconds), ms (milliseconds), µs (microseconds), B (Bytes), KB (kilobytes), MB (megabytes). Separate time and memory unit by comma.`],
-    ['v', 'verbose', 'Print verbose information.']
-  ]).setHelp(
-    'Usage: js-profiler [OPTIONS] [profile1 profile2 ...]\n\n' +
-    'Parameters:\n' +
-    '  profile1 profile2 ...\n' +
-    '  Optionally specify the profiles you want to run separated by spaces.\n\n' +
-    'Options:\n' +
-    '[[OPTIONS]]\n'
-  ).bindHelp().parseSystem();
+  ['h', 'help', 'Display this helptext.'],
+  ['i', 'iterations=', `Specify the number of iterations per profiled function. Default: ${DEFAULTS.iterations}.`],
+  ['j', 'json', 'Output results in JSON format.'],
+  ['l', 'list', 'List available profiles.'],
+  ['m', 'magnitude=', `Specify the magnitude of testdata. Default: ${DEFAULTS.magnitude}.`],
+  ['', 'memory', 'If present, memory consumption is measured.'],
+  ['p', 'precision=', `Specify the precision in terms of decimal places of results. Default: ${DEFAULTS.precision.time},${DEFAULTS.precision.memory}. Separate time and memory precision by comma.`],
+  ['q', 'quiet', 'Print results only.'],
+  ['u', 'unit=', `Specify the unit for time and memory output. Default: ${DEFAULTS.units.time},${DEFAULTS.units.memory}. Possible values: auto (automatically convert between milli- and microseconds), ms (milliseconds), µs (microseconds), B (Bytes), KB (kilobytes), MB (megabytes). Separate time and memory unit by comma.`],
+  ['v', 'verbose', 'Print verbose information.']
+]).setHelp(
+  'Usage: js-profiler [OPTIONS] [profile1 profile2 ...]\n\n'
+  + 'Parameters:\n'
+  + '  profile1 profile2 ...\n'
+  + '  Optionally specify the profiles you want to run separated by spaces.\n\n'
+  + 'Options:\n'
+  + '[[OPTIONS]]\n'
+).bindHelp().parseSystem();
 
 const options = Object.assign({}, DEFAULTS, { console: true });
 
@@ -62,11 +60,11 @@ if ('list' in opts.options) {
     console.info(profileList.map((profile) => {
       switch (options.verbosity) {
         case VERBOSITY.VERBOSE:
-          return `${chalk.bold.underline(profile.name)}\n` +
-            `${profile.description.long}\n` +
-            `Profiled functions:\n` +
-            `${profile.functions.map((f) => `  ${f}`)
-              .join('\n')}`
+          return `${chalk.bold.underline(profile.name)}\n`
+            + `${profile.description.long}\n`
+            + 'Profiled functions:\n'
+            + `${profile.functions.map((f) => `  ${f}`)
+                .join('\n')}`;
         case VERBOSITY.NORMAL:
           return `${chalk.bold.underline(profile.name)}: ${profile.description.short}`;
       }
@@ -116,7 +114,7 @@ if ('unit' in opts.options) {
   } else {
     console.warn(chalk.yellow(`WARNING: "${units[0]}" is not a valid time unit. Defaulting to ${options.units.time}.`));
   }
-  
+
   if (units.length > 1) {
     if (UNITS.isValidMemoryUnit(units[1])) {
       options.units.memory = units[1];
