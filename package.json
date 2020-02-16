@@ -1,6 +1,6 @@
 {
   "name": "js-profiler",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "lib/index.js",
   "man": "./docs/js-profiler.1.gz",
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node bin/js-profiler.js",
+    "manpage": "gzip -c docs/js-profiler.1 > docs/js-profiler.1.gz",
     "test": "mocha --recursive \"./{,!(node_modules)/**/}*.test.js\"",
     "tdd": "mocha --recursive --watch \"./{,!(node_modules)/**/}*.test.js\"",
     "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml \"./{,!(node_modules)/**/}*.test.js\"",

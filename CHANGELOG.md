@@ -1,3 +1,6 @@
+### 2.2.2
+* [#94: Fix manpage.](https://github.com/haensl/js-profiler/issues/94)
+
 ### 2.2.1
 * [#90: Migrate to CircleCI.](https://github.com/haensl/js-profiler/issues/90)
 
