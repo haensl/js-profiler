@@ -18,6 +18,8 @@ commands:
           working_directory: ~/js-profiler
           command: |
             PACKAGE_JSON_VERSION=$(node -e "console.info(require('./package').version)")
+            ENGINE=$(node -e "console.info(require('./package').engines.node..exec(/(\d+\.){2}\d+$/)[0])")
+            echo "export ENGINE=${ENGINE}" >> ${BASH_ENV}
             echo "export PACKAGE_JSON_VERSION=${PACKAGE_JSON_VERSION}" >> $BASH_ENV
             echo "package.json version: ${PACKAGE_JSON_VERSION}"
   extract-published-version:
@@ -109,7 +111,12 @@ workflows:
   default:
     when: always
     jobs:
+      - extract-versions
       - lint
+      - test:
+          node_version: $ENGINE
+          requires:
+            - extract-versions
       - test
       - bundle:
           requires:
@@ -133,6 +140,14 @@ workflows:
             - publish
 
 jobs:
+  extract-versions:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/js-profiler
+    steps:
+      - init
+      - prepare-repo
+
   lint:
     docker:
       - image: circleci/node:lts
@@ -150,9 +165,12 @@ jobs:
           path: test-results
 
   test:
+    parameters:
+      node_version:
+        type: string
+        default: lts
     docker:
-      - image: circleci/node:lts
-      - image: circleci/node:8.14.0
+      - image: circleci/node:<< parameters.node_version >>
     working_directory: ~/js-profiler
     steps:
       - init
