@@ -41,8 +41,9 @@ commands:
           name: extract manpage version
           working_directory: ~/js-profiler
           command: |
-            VERSION=$(head -n2 docs/js-profiler.1 | grep -o '\([0-9]\+\.\)\{2\}[0-9]\+')
-            echo "export MANPAGE_VERSION=${VERSION}" >> $BASH_ENV
+            MANPAGE_VERSION=$(head -n2 docs/js-profiler.1 | grep -o '\([0-9]\+\.\)\{2\}[0-9]\+')
+            echo "export MANPAGE_VERSION=${MANPAGE_VERSION}" >> $BASH_ENV
+            echo "manpage version: ${MANPAGE_VERSION}"
 
   extract-versions:
     steps:
