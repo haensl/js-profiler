@@ -22,6 +22,7 @@ commands:
             echo "export ENGINE=${ENGINE}" >> ${BASH_ENV}
             echo "export PACKAGE_JSON_VERSION=${PACKAGE_JSON_VERSION}" >> $BASH_ENV
             echo "package.json version: ${PACKAGE_JSON_VERSION}"
+            echo "engine version: ${ENGINE}"
   extract-published-version:
     steps:
       - run:
@@ -114,12 +115,12 @@ workflows:
       - extract-versions
       - lint
       - test:
-          node_version: $ENGINE
+          node_version: lts
+          name: test-node@lts
+      - test:
+          name: test-node@engine
           requires:
             - extract-versions
-          name: test-node@engine
-      - test:
-          name: test-node@lts
       - bundle:
           requires:
             - lint
@@ -171,7 +172,7 @@ jobs:
     parameters:
       node_version:
         type: string
-        default: lts
+        default: $ENGINE
     docker:
       - image: circleci/node:<< parameters.node_version >>
     working_directory: ~/js-profiler
