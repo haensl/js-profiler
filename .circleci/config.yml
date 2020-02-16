@@ -112,15 +112,17 @@ workflows:
   default:
     when: always
     jobs:
-      - extract-versions
       - lint
       - test:
           node_version: lts
           name: test-node@lts
       - test:
-          name: test-node@engine
-          requires:
-            - extract-versions
+          name: test-node@engi
+          # unfortunately cannot access environment variables
+          # at this point in time because config templates
+          # are pre-compiled. See
+          # https://discuss.circleci.com/t/how-to-use-a-bash-env-variable-as-a-parameter-to-a-command-or-when-condition/29186
+          node_version: 8.14.0
       - bundle:
           requires:
             - lint
@@ -172,7 +174,7 @@ jobs:
     parameters:
       node_version:
         type: string
-        default: $ENGINE
+        default: lts
     docker:
       - image: circleci/node:<< parameters.node_version >>
     working_directory: ~/js-profiler
