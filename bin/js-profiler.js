@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const log = require('@haensl/log');
 const DEFAULTS = require('../lib/support/defaults');
 const VERBOSITY = require('../lib/support/verbosity');
-const UNITS = require('./lib/support/units');
+const UNITS = require('../lib/support/units');
 const jsProfiler = require('../lib');
 
 const opts = new GetOpt([
