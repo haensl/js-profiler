@@ -18,7 +18,7 @@ commands:
           working_directory: ~/js-profiler
           command: |
             PACKAGE_JSON_VERSION=$(node -e "console.info(require('./package').version)")
-            ENGINE=$(node -e "console.info(require('./package').engines.node.exec(/(\d+\.){2}\d+$/)[0])")
+            ENGINE=$(node -e "console.info(/(\d+\.){2}\d+$/.exec(require('./package').engines.node)[0])")
             echo "export ENGINE=${ENGINE}" >> ${BASH_ENV}
             echo "export PACKAGE_JSON_VERSION=${PACKAGE_JSON_VERSION}" >> $BASH_ENV
             echo "package.json version: ${PACKAGE_JSON_VERSION}"
