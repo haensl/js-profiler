@@ -1,0 +1,278 @@
+# https://circleci.com/docs/2.1/language-javascript/
+version: 2.1
+commands:
+  extract-changelog-version:
+    steps:
+      - run:
+          name: extract changelog version
+          working_directory: ~/js-profiler
+          command: |
+            VERSION=$(head -n1 CHANGELOG.md | grep -o '\([0-9]\+\.\)\{2\}[0-9]\+')
+            echo "export VERSION=${VERSION}" >> $BASH_ENV
+            echo "export CHANGELOG_VERSION=${VERSION}" >> $BASH_ENV
+            echo "changelog version: ${VERSION}"
+  extract-package-json-version:
+    steps:
+      - run:
+          name: extract package.json version
+          working_directory: ~/js-profiler
+          command: |
+            PACKAGE_JSON_VERSION=$(node -e "console.info(require('./package').version)")
+            echo "export PACKAGE_JSON_VERSION=${PACKAGE_JSON_VERSION}" >> $BASH_ENV
+            echo "package.json version: ${PACKAGE_JSON_VERSION}"
+  extract-published-version:
+    steps:
+      - run:
+          name: extract latest published version
+          working_directory: ~/js-profiler
+          command: |
+            LIVE_VERSION=$(npm show js-profiler version)
+            echo "export LIVE_VERSION=${LIVE_VERSION}" >> ${BASH_ENV}
+            echo "latest published version: ${LIVE_VERSION}"
+
+  extract-versions:
+    steps:
+      - extract-package-json-version
+      - extract-changelog-version
+      - extract-published-version
+
+  init:
+    steps:
+      - run:
+          name: update npm
+          command: sudo npm install -g npm@latest
+
+  prepare-repo:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - js-profiler-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: install dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: js-profiler-dependencies-{{ checksum "package.json" }}
+      - extract-versions
+
+
+  create-test-project:
+    steps:
+      - run:
+          working-directory: /tmp
+          name: create test application
+          command: |
+            mkdir test-app && npm init -y
+
+  bundle-test-setup:
+    steps:
+      - attach_workspace:
+          at: ~/js-profiler
+      - create-test-project
+      - run:
+          name: install module
+          working-directory: /tmp/test-app
+          command: |
+            npm i -S ~/js-profiler/js-profiler.tgz
+            npm i -g ~/js-profiler/js-profiler.tgz
+
+  package-test-setup:
+    steps:
+      - attach_workspace:
+          at: ~/js-profiler
+      - create-test-project
+      - extract-versions
+      - run:
+          name: install module
+          working-directory: /tmp/test-app
+          command: |
+            npm i -S js-profiler@${VERSION}
+            npm i -g js-profiler@${VERSION}
+
+  package-information:
+    steps:
+      - run:
+          name: install tree
+          command: sudo apt-get -y install tree
+      - run:
+          name: gather bundle information
+          command: |
+            npm info js-profiler@${VERSION} > ./bundle.info
+            tree -s node_modules/js-profiler >> ./bundle.info
+      - store_artifacts:
+          path: bundle.info
+
+workflows:
+  version: 2
+  default:
+    when: always
+    jobs:
+      - lint
+      - test
+      - bundle:
+          requires:
+            - lint
+            - test
+      - bundle-test-cjs-js:
+          requires:
+            - bundle
+      - ensure-versioned-correctly:
+          requires:
+            - bundle
+      - publish:
+          requires:
+            - ensure-versioned-correctly
+            - bundle-test-cjs-js
+          filters:
+            branches:
+              only: master
+      - package-test-cjs-js:
+          requires:
+            - publish
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/js-profiler
+    steps:
+      - init
+      - prepare-repo
+      - run:
+          name: create test-results-folder
+          command: mkdir -p test-results/eslint
+      - run:
+          name: lint
+          command: npm run lint:ci
+      - store_test_results:
+          path: test-results
+
+  test:
+    docker:
+      - image: circleci/node:lts
+      - image: circleci/node:8.14.0
+    working_directory: ~/js-profiler
+    steps:
+      - init
+      - prepare-repo
+      - run:
+          name: unit tests
+          command: npm run test:ci
+      - store_test_results:
+          path: test-results
+
+  bundle:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/js-profiler
+    steps:
+      - init
+      - prepare-repo
+      - run:
+          name: bundle
+          command: npm run build
+      - store_artifacts:
+          path: lib
+      - run:
+          name: generate tarball
+          command: |
+            npm pack
+            mv js-profiler-${VERSION}.tgz js-profiler.tgz
+      - store_artifacts:
+          path: js-profiler.tgz
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - CHANGELOG.md
+            - src
+            - lib
+            - README.md
+            - LICENSE
+            - package.json
+            - package-lock.json
+            - js-profiler.tgz
+            - .npmignore
+
+  bundle-test-cjs-js:
+    docker:
+      - image: circleci/node:lts
+    working_directory: /tmp/test-app
+    steps:
+      - init
+      - bundle-test-setup
+      - run:
+          name: test node.js module
+          command: |
+            cp ~/js-profiler/package-tests/cjs/node.e2e.js ./
+            node node.e2e.js
+      - run:
+          name: test global cli
+          command: |
+            js-profiler -h
+
+
+  ensure-versioned-correctly:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/js-profiler
+    steps:
+      - attach_workspace:
+          at: ~/js-profiler
+      - init
+      - extract-versions
+      - run:
+          name: changelog matches package.json
+          command: |
+            test ${PACKAGE_JSON_VERSION} = ${CHANGELOG_VERSION}
+      - run:
+          name: pacakge.json greater than live
+          command: |
+            node \<<VERSION_CHECK
+            const pkgVersion = require('./package').version
+              .split('.')
+              .map((i) => parseInt(i, 10));
+            const liveVersion = process.env.LIVE_VERSION
+              .split('.')
+              .map((i) => parseInt(i, 10));
+            const isGreater = pkgVersion.reduce((isGreater, part, i) => {
+              return isGreater || (part > liveVersion[i]);
+            }, false);
+            if (!isGreater) {
+              process.exit(1);
+            }
+            VERSION_CHECK
+
+  publish:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/js-profiler
+    steps:
+      - attach_workspace:
+          at: ~/js-profiler
+      - init
+      - run:
+          name: setup npm registry token
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      - run:
+          name: publish node module
+          command: npm publish
+
+  package-test-cjs-js:
+    docker:
+      - image: circleci/node:lts
+    working_directory: /tmp/test-app
+    steps:
+      - init
+      - package-test-setup
+      - run:
+          name: test node.js module
+          command: |
+            cp ~/js-profiler/src/package-tests/cjs/node.e2e.js ./
+            node node.e2e.js
+      - run:
+          name: test global cli
+          command: |
+            js-profiler -h
+      - package-information

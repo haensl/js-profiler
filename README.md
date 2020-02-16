@@ -10,15 +10,17 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 [![NPM](https://nodei.co/npm/js-profiler.png?downloads=true)](https://nodei.co/npm/js-profiler/)
 
-[![Build Status](https://travis-ci.org/haensl/js-profiler.svg?branch=master)](https://travis-ci.org/haensl/js-profiler)
+[![CircleCI](https://circleci.com/gh/haensl/js-profiler.svg?style=svg)](https://circleci.com/gh/haensl/js-profiler)
 
 ## Table of contents
 
 * [Installation](#installation)
-* [New in version 2 & Migration](#new-in-v2)
-  * [Comparison of v1 vs. v2 profile object](#comp-v2-v1-profile)
-    * [v1 profile object](#v1-profile)
-    * [v2 profile object](#v2-profile)
+* [Updates](#updates)
+  * [v2.2.0: Migrate to Node.js Performance Hooks](#new-in-v2.2.0)
+  * [New in version 2 & Migration](#new-in-v2)
+    * [Comparison of v1 vs. v2 profile object](#comp-v2-v1-profile)
+      * [v1 profile object](#v1-profile)
+      * [v2 profile object](#v2-profile)
 * [Usage](#usage)
   * [CLI](#usage-cli)
   * [Library](#usage-lib)
@@ -39,7 +41,13 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 `npm i [-gS] js-profiler`
 
-## New in version 2 & Migration from v1.x.y to v2.x.y<a name="new-in-v2"></a>
+## Updates<a name="updates"></a>
+
+### [v2.2.0](https://github.com/haensl/js-profiler/releases/tag/v2.2.0): Migrate to [Node.js Performance Hooks](https://nodejs.org/dist/latest-v12.x/docs/api/perf_hooks.html)<a name="new-in-v2.2.0"></a>
+
+As of [version 2.2.0](https://github.com/haensl/js-profiler/releases/tag/v2.2.0) js-profiler gathers function timing information via the [Performance Hooks API](https://nodejs.org/dist/latest-v12.x/docs/api/perf_hooks.html) instead of [process.hrtime()](https://nodejs.org/dist/latest-v12.x/docs/api/process.html#process_process_hrtime_time).
+
+### New in version 2 & Migration from v1.x.y to v2.x.y<a name="new-in-v2"></a>
 
 * `profile.tests` is renamed to `profile.functions`
 * `function.description` _(formerly `test.description`)_ now contains a _nice_ human readable description.
@@ -48,9 +56,9 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 * `function.keywords` contains keywords associated with the function under test.
 * `profile.keywords` contains keywords associated with this profile.
 
-### Comparison of a v1 vs. v2 profile object<a name="comp-v2-v1-profile"></a>
+#### Comparison of a v1 vs. v2 profile object<a name="comp-v2-v1-profile"></a>
 
-#### Version 1.x.y profile object<a name="v1-profile"></a>
+##### Version 1.x.y profile object<a name="v1-profile"></a>
 
 ```javascript
 // v1
@@ -96,7 +104,7 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 }
 ```
 
-#### Version 2.x.y profile object<a name="v2-profile"></a>
+##### Version 2.x.y profile object<a name="v2-profile"></a>
 
 ```javascript
 // v2
