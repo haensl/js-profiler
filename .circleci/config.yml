@@ -117,7 +117,7 @@ workflows:
           node_version: lts
           name: test-node@lts
       - test:
-          name: test-node@engi
+          name: test-node@engine
           # unfortunately cannot access environment variables
           # at this point in time because config templates
           # are pre-compiled. See
