@@ -11,7 +11,7 @@
     "start": "node bin/js-profiler.js",
     "test": "mocha --recursive \"./{,!(node_modules)/**/}*.test.js\"",
     "tdd": "mocha --recursive --watch \"./{,!(node_modules)/**/}*.test.js\"",
-    "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml",
+    "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml \"./{,!(node_modules)/**/}*.test.js\"",
     "lint": "eslint -c ./.eslintrc.json lib/**/*.js",
     "lint:ci": "eslint -c .eslintrc.json --format junit -o test-results/eslint/results.xml lib/**/*.js"
   },
@@ -58,6 +58,7 @@
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
     "mocha": "^7.0.1",
+    "mocha-junit-reporter": "^1.23.3",
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0"
   },
