@@ -117,12 +117,14 @@ workflows:
           node_version: $ENGINE
           requires:
             - extract-versions
-      - test
+          name: test-node@engine
+      - test:
+          name: test-node@lts
       - bundle:
           requires:
             - lint
             - test-node@lts
-            - test-node@$ENGINE
+            - test-node@engine
       - bundle-test-cjs-js:
           requires:
             - bundle
@@ -172,7 +174,6 @@ jobs:
         default: lts
     docker:
       - image: circleci/node:<< parameters.node_version >>
-    name: test-node@<< parameters.node_version >>
     working_directory: ~/js-profiler
     steps:
       - init
