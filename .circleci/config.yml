@@ -144,7 +144,8 @@ workflows:
       - publish:
           requires:
             - ensure-versioned-correctly
-            - bundle-test-cjs-js
+            - bundle-test-cjs-js@engine
+            - bundle-test-cjs-js@lts
           filters:
             branches:
               only: master
