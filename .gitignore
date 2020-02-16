@@ -1,5 +1,6 @@
 node_modules/
 test-results/
+docs/*.gz
 *.log
 *.tgz
 .DS_Store
