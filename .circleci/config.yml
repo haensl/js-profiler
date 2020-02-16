@@ -79,7 +79,7 @@ commands:
           working-directory: /tmp/test-app
           command: |
             npm i -S ~/js-profiler/js-profiler.tgz
-            npm i -g ~/js-profiler/js-profiler.tgz
+            sudo npm i -g ~/js-profiler/js-profiler.tgz
 
   package-test-setup:
     steps:
@@ -92,7 +92,7 @@ commands:
           working-directory: /tmp/test-app
           command: |
             npm i -S js-profiler@${VERSION}
-            npm i -g js-profiler@${VERSION}
+            sudo npm i -g js-profiler@${VERSION}
 
   package-information:
     steps:
@@ -129,6 +129,13 @@ workflows:
             - test-node@lts
             - test-node@engine
       - bundle-test-cjs-js:
+          name: bundle-test-cjs-js@lts
+          node_version: lts
+          requires:
+            - bundle
+      - bundle-test-cjs-js:
+          name: bundle-test-cjs-js@engine
+          node_version: 8.14.0
           requires:
             - bundle
       - ensure-versioned-correctly:
@@ -142,6 +149,13 @@ workflows:
             branches:
               only: master
       - package-test-cjs-js:
+          name: package-test-cjs-js@lts
+          node_version: lts
+          requires:
+            - publish
+      - package-test-cjs-js:
+          name: package-test-cjs-js@engine
+          node_version: 8.14.0
           requires:
             - publish
 
@@ -216,8 +230,12 @@ jobs:
             - .npmignore
 
   bundle-test-cjs-js:
+    parameters:
+      node_version:
+        type: string
+        default: lts
     docker:
-      - image: circleci/node:lts
+      - image: circleci/node:<< parameters.node_version >>
     working_directory: /tmp/test-app
     steps:
       - init
@@ -280,8 +298,12 @@ jobs:
           command: npm publish
 
   package-test-cjs-js:
+    parameters:
+      node_version:
+        type: string
+        default: lts
     docker:
-      - image: circleci/node:lts
+      - image: circleci/node:<< parameters.node_version >>
     working_directory: /tmp/test-app
     steps:
       - init
