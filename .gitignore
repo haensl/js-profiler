@@ -1,3 +1,5 @@
-node_modules
-npm-debug.log
+node_modules/
+test-results/
+*.log
+*.tgz
 .DS_Store

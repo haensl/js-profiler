@@ -1,22 +1,25 @@
 {
   "name": "js-profiler",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
-  "main": "./lib/index.js",
+  "main": "lib/index.js",
   "man": "./docs/js-profiler.1.gz",
   "bin": {
-    "js-profiler": "./js-profiler.js"
+    "js-profiler": "bin/js-profiler.js"
   },
   "scripts": {
-    "start": "node js-profiler.js",
-    "test": "mocha --recursive \"./{,!(node_modules)/**/}*.spec.js\"",
-    "tdd": "mocha --recursive --watch \"./{,!(node_modules)/**/}*.spec.js\"",
-    "lint": "eslint -c ./.eslintrc.json **/*.js"
+    "start": "node bin/js-profiler.js",
+    "test": "mocha --recursive \"./{,!(node_modules)/**/}*.test.js\"",
+    "tdd": "mocha --recursive --watch \"./{,!(node_modules)/**/}*.test.js\"",
+    "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml \"./{,!(node_modules)/**/}*.test.js\"",
+    "lint": "eslint -c ./.eslintrc.json lib/**/*.js",
+    "lint:ci": "eslint -c .eslintrc.json --format junit -o test-results/eslint/results.xml lib/**/*.js"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint && npm test",
-      "pre-push": "npm run lint && npm test"
+      "pre-push": "npm run lint && npm test",
+      "post-pull": "npm install"
     }
   },
   "keywords": [
@@ -44,18 +47,20 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "chalk": "^1.1.3",
-    "glob": "^7.1.5",
-    "node-getopt": "^0.2.4"
+    "@haensl/log": "^1.2.1",
+    "chalk": "^3.0.0",
+    "glob": "^7.1.6",
+    "node-getopt": "^0.3.2"
   },
   "devDependencies": {
     "@haensl/eslint-config": "^1.3.0",
-    "chai": "^3.5.0",
-    "eslint": "^4.19.1",
-    "husky": "^1.3.1",
-    "mocha": "^5.2.0",
-    "sinon": "^1.17.7",
-    "sinon-chai": "^2.14.0"
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.3",
+    "mocha": "^7.0.1",
+    "mocha-junit-reporter": "^1.23.3",
+    "sinon": "^8.1.1",
+    "sinon-chai": "^3.4.0"
   },
   "engines": {
     "node": ">=8.14.0"

@@ -1,11 +1,11 @@
-#!/usr/bin/env node --expose-gc
-
+#!/usr/bin/env node
 const GetOpt = require('node-getopt');
 const chalk = require('chalk');
-const DEFAULTS = require('./lib/support/defaults');
-const VERBOSITY = require('./lib/support/verbosity');
-const UNITS = require('./lib/support/units');
-const jsProfiler = require('./lib');
+const log = require('@haensl/log');
+const DEFAULTS = require('../lib/support/defaults');
+const VERBOSITY = require('../lib/support/verbosity');
+const UNITS = require('../lib/support/units');
+const jsProfiler = require('../lib');
 
 const opts = new GetOpt([
   ['h', 'help', 'Display this helptext.'],
@@ -45,7 +45,7 @@ if ('json' in opts.options) {
 if ('list' in opts.options) {
   const profileList = jsProfiler.list();
   if (options.json) {
-    console.info(JSON.stringify(profileList.map((p) => {
+    log.info(JSON.stringify(profileList.map((p) => {
       switch(options.verbosity) {
         case VERBOSITY.VERBOSE:
           return Object.assign({}, p, { description: p.description.long });
@@ -57,7 +57,7 @@ if ('list' in opts.options) {
       }
     }).filter((p) => typeof p === 'object'), null, 2));
   } else {
-    console.info(profileList.map((profile) => {
+    log.info(profileList.map((profile) => {
       switch (options.verbosity) {
         case VERBOSITY.VERBOSE:
           return `${chalk.bold.underline(profile.name)}\n`
@@ -78,7 +78,7 @@ if ('iterations' in opts.options) {
   if (!isNaN(parseInt(opts.options.iterations, 10))) {
     options.iterations = parseInt(opts.options.iterations, 10);
   } else {
-    console.warn(chalk.yellow(`WARNING: "${opts.options.iterations}" is not a valid iterations number. Defaulting to ${options.iterations}.`));
+    log.warn(chalk.yellow(`WARNING: "${opts.options.iterations}" is not a valid iterations number. Defaulting to ${options.iterations}.`));
   }
 }
 
@@ -86,7 +86,7 @@ if ('magnitude' in opts.options) {
   if (!isNaN(parseInt(opts.options.magnitude, 10))) {
     options.magnitude = parseInt(opts.options.magnitude, 10);
   } else {
-    console.warn(chalk.yellow(`WARNING: "${opts.options.magnitude}" is not a valid magnitude number. Defaulting to ${options.magnitude}.`));
+    log.warn(chalk.yellow(`WARNING: "${opts.options.magnitude}" is not a valid magnitude number. Defaulting to ${options.magnitude}.`));
   }
 }
 
@@ -95,14 +95,14 @@ if ('precision' in opts.options) {
   if (!isNaN(parseInt(precision[0], 10))) {
     options.precision.time = precision[0];
   } else {
-    console.warn(chalk.yellow(`WARNING: "${precision[0]}" is not a valid time precision. Defaulting to ${options.precision.time}.`));
+    log.warn(chalk.yellow(`WARNING: "${precision[0]}" is not a valid time precision. Defaulting to ${options.precision.time}.`));
   }
 
   if (precision.length > 1) {
     if (!isNaN(parseInt(precision[1], 10))) {
       options.precision.memory = precision[1];
     } else {
-      console.warn(chalk.yellow(`WARNING: "${precision[1]}" is not a valid memory precision. Defaulting to ${options.precision.memory}.`));
+      log.warn(chalk.yellow(`WARNING: "${precision[1]}" is not a valid memory precision. Defaulting to ${options.precision.memory}.`));
     }
   }
 }
@@ -112,14 +112,14 @@ if ('unit' in opts.options) {
   if (UNITS.isValidTimeUnit(units[0])) {
     options.units.time = units[0];
   } else {
-    console.warn(chalk.yellow(`WARNING: "${units[0]}" is not a valid time unit. Defaulting to ${options.units.time}.`));
+    log.warn(chalk.yellow(`WARNING: "${units[0]}" is not a valid time unit. Defaulting to ${options.units.time}.`));
   }
 
   if (units.length > 1) {
     if (UNITS.isValidMemoryUnit(units[1])) {
       options.units.memory = units[1];
     } else {
-      console.warn(chalk.yellow(`WARNING: "${units[1]}" is not a valid memory unit. Defaulting to ${options.units.memory}.`));
+      log.warn(chalk.yellow(`WARNING: "${units[1]}" is not a valid memory unit. Defaulting to ${options.units.memory}.`));
     }
   }
 }
@@ -134,6 +134,6 @@ if (opts.argv.length > 0) {
 
 jsProfiler.run(options)
   .catch((err) => {
-    console.error(err.stack);
+    log.error(err.message, err.stack);
     process.exit(1);
   });
