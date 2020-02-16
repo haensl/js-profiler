@@ -171,11 +171,6 @@ jobs:
       - init
       - prepare-repo
       - run:
-          name: bundle
-          command: npm run build
-      - store_artifacts:
-          path: lib
-      - run:
           name: generate tarball
           command: |
             npm pack
@@ -186,8 +181,9 @@ jobs:
           root: ./
           paths:
             - CHANGELOG.md
-            - src
             - lib
+            - bin
+            - package-tests
             - README.md
             - LICENSE
             - package.json
