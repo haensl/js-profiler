@@ -1,3 +1,6 @@
+### 2.2.1
+* [#90: Migrate to CircleCI.](https://github.com/haensl/js-profiler/issues/90)
+
 ### 2.2.0
 * [#91: Migrate to Node.js Performance Hooks.](https://github.com/haensl/js-profiler/issues/91)
 * [#90: Migrate to CircleCI.](https://github.com/haensl/js-profiler/issues/90)

@@ -313,7 +313,7 @@ jobs:
       - run:
           name: test node.js module
           command: |
-            cp ~/js-profiler/src/package-tests/cjs/node.e2e.js ./
+            cp ~/js-profiler/package-tests/cjs/node.e2e.js ./
             node node.e2e.js
       - run:
           name: test global cli
