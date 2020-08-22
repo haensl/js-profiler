@@ -174,7 +174,8 @@ workflows:
             - publish
       - publish-github-release:
           requires:
-            - package-test-cjs-js
+            - package-test-cjs-js@lts
+            - package-test-cjs-js@engine
 
 jobs:
   extract-versions:
