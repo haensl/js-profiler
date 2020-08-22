@@ -172,6 +172,9 @@ workflows:
           node_version: 8.14.0
           requires:
             - publish
+      - publish-github-release:
+          requires:
+            - package-test-cjs-js
 
 jobs:
   extract-versions:
@@ -342,3 +345,20 @@ jobs:
           command: |
             js-profiler -h
       - package-information
+
+  publish-github-release:
+    docker:
+      - image: cibuilds/github
+    steps:
+      - attach_workspace:
+          at: ~/js-profiler
+      - extract-changelog-version
+      - run:
+          name: publish github release
+          working_directory: ~/js-profiler
+          command: |
+            cp ./js-profiler.tgz ./js-profiler-${VERSION}.tgz
+            CHANGES=$(awk "/## ${VERSION}/,/^$/" CHANGELOG.md)
+            echo "Publishing release v${VERSION} to Github.\nChanges:"
+            echo $CHANGES
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -n "v${VERSION}" -b "${CHANGES}" "v${VERSION}" ./js-profiler-${VERSION}.tgz

@@ -16,6 +16,7 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 * [Installation](#installation)
 * [Updates](#updates)
+  * [v2.3.0: New profile: shallow array copying.](#new-in-v2.3.0)
   * [v2.2.0: Migrate to Node.js Performance Hooks](#new-in-v2.2.0)
   * [New in version 2 & Migration](#new-in-v2)
     * [Comparison of v1 vs. v2 profile object](#comp-v2-v1-profile)
@@ -26,6 +27,7 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
   * [Library](#usage-lib)
 * [Profiles](#profiles)
   * [array concatenation](#array-concat)
+  * [array copying](#array-copy)
   * [comparison operators](#comparison-operators)
   * [guards](#guards)
   * [loops](#loops)
@@ -42,6 +44,10 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 `npm i [-gS] js-profiler`
 
 ## Updates<a name="updates"></a>
+
+### [v2.3.0](https://github.com/haensl/js-profiler/releases/tag/v2.3.0): A new contributor and a new profile: [shallow array copying.](#array-copy)<a name="new-in-v2.3.0"></a>
+
+We are happy to welcome [Josh Howe](https://github.com/joshtch) as a contributor to JS-Profiler! He added a [new profile comparing ways to shallow copy arrays](#array-copy)! Big thank you!
 
 ### [v2.2.0](https://github.com/haensl/js-profiler/releases/tag/v2.2.0): Migrate to [Node.js Performance Hooks](https://nodejs.org/dist/latest-v12.x/docs/api/perf_hooks.html)<a name="new-in-v2.2.0"></a>
 
@@ -205,6 +211,51 @@ For configuration options please refer to the [Library documentation](docs/lib.m
 
 ## Available performance profiles:<a name="profiles"></a>
 
+### [array concatenation](https://js-profiler.com/#array-concatenation)<a name="array-concat"></a>
+Array concatenation variations: Combining two arrays using different techniques.
+
+Profiled operations:
+  * `a.concat(b)`
+  * `for (...) { a.push(b[i])}`
+  * `for (...) { b.unshift(a[i])}`
+  * `a.push.apply(a, b)`
+  * `Array.prototype.unshift.apply(b, a)`
+  * `b.reduce((arr, item) => arr.push(item), a)`
+  * `a.reduceRight((arr, item) => arr.unshift(item), b)`
+  * `[...a, ...b]`
+
+### [array copying](https://js-profiler.com/#array-copying)<a name="array-copy"></a>
+Array copying variations: creating a new array with the same elements as an existing array.
+
+Profiled operations:
+  * `a.slice()`
+  * `[...a]`
+  * `Array.from(a)`
+  * `new Array(...a)`
+  * `a.concat([])`
+  * `[].concat(a)`
+  * `Array.prototype.unshift.apply([], a);`
+  * `Array.prototype.unshift.apply(new Arrray(), a)`
+  * `[].push(...a)`
+  * `(new Array()).push(...a)`
+  * `b = []; for(...){ b.push(a[i]) }`
+  * `b = new Array(a.length); for(...){ b[i] = a[i] }`
+
+### [comarison operators](https://js-profiler.com/#comparison-operators)<a name="comparison-operators"></a>
+Variable comparison operators.
+
+Profiled operations:
+  * `a > b`
+  * `a >= b`
+  * `a < b`
+  * `a <= b`
+  * `==`
+  * `===`
+  * `!=`
+  * `!==`
+  * `&&`
+  * ||
+
 ### [guards](https://js-profiler.com/#guards)<a name="guards"></a>
 Variable guards: checking whether a variable is defined or of a certain type.
 
@@ -263,42 +314,6 @@ Profiled operations:
   * `Object.defineProperties({}, props)`
   * `{ ...props }`
 
-### [recursion](https://js-profiler.com/#recursion)<a name="recursion"></a>
-Recurstion variations: Calculating sum of array of integers. Profile contains a simple for-loop for reference.
-
-Profiled operations:
-  * `for loop sum for reference`
-  * `recursive sum`
-  * `tail recursive sum`
-
-### [array concatenation](https://js-profiler.com/#array-concatenation)<a name="array-concat"></a>
-Array concatenation variations: Combining two arrays using different techniques.
-
-Profiled operations:
-  * `a.concat(b)`
-  * `for (...) { a.push(b[i])}`
-  * `for (...) { b.unshift(a[i])}`
-  * `a.push.apply(a, b)`
-  * `b.unshift.appy(b, a)`
-  * `b.reduce((arr, item) => arr.push(item), a)`
-  * `a.reduceRight((arr, item) => arr.unshift(item), b)`
-  * `[...a, ...b]`
-
-### [comarison operators](https://js-profiler.com/#comparison-operators)<a name="comparison-operators"></a>
-Variable comparison operators.
-
-Profiled operations:
-  * `a > b`
-  * `a >= b`
-  * `a < b`
-  * `a <= b`
-  * `==`
-  * `===`
-  * `!=`
-  * `!==`
-  * `&&`
-  * ||
-
 ### [object iteration](https://js-profiler.com/#object-iteration)<a name="object-iteration"></a>
 Object iteration: different ways of iterating over properties of an object and concatenating property names into a single string.
 
@@ -312,6 +327,13 @@ Profiled operations:
   * `for (prop of Object.getOwnPropertyNames(obj))`
   * `Object.getOwnPropertyNames(obj).forEach()`
 
+### [recursion](https://js-profiler.com/#recursion)<a name="recursion"></a>
+Recurstion variations: Calculating sum of array of integers. Profile contains a simple for-loop for reference.
+
+Profiled operations:
+  * `for loop sum for reference`
+  * `recursive sum`
+  * `tail recursive sum`
 
 ## [Documentation](docs/index.md)
 
