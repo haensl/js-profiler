@@ -1,3 +1,9 @@
+### 2.3.0
+* [#98: Add profile for shallow array copying.](https://github.com/haensl/js-profiler/issues/98)
+* Automate Github release via CircleCI.
+* Update dependencies.
+* Lift required Node.js version from 8.14.0 to 10.12.0 to accomodate update dependencies.
+
 ### 2.2.2
 * [#94: Fix manpage.](https://github.com/haensl/js-profiler/issues/94)
 

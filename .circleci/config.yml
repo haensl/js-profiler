@@ -135,7 +135,7 @@ workflows:
           # at this point in time because config templates
           # are pre-compiled. See
           # https://discuss.circleci.com/t/how-to-use-a-bash-env-variable-as-a-parameter-to-a-command-or-when-condition/29186
-          node_version: 8.14.0
+          node_version: 10.12.0
       - bundle:
           requires:
             - lint
@@ -148,7 +148,7 @@ workflows:
             - bundle
       - bundle-test-cjs-js:
           name: bundle-test-cjs-js@engine
-          node_version: 8.14.0
+          node_version: 10.12.0
           requires:
             - bundle
       - ensure-versioned-correctly:
@@ -169,9 +169,13 @@ workflows:
             - publish
       - package-test-cjs-js:
           name: package-test-cjs-js@engine
-          node_version: 8.14.0
+          node_version: 10.12.0
           requires:
             - publish
+      - publish-github-release:
+          requires:
+            - package-test-cjs-js@lts
+            - package-test-cjs-js@engine
 
 jobs:
   extract-versions:
@@ -342,3 +346,20 @@ jobs:
           command: |
             js-profiler -h
       - package-information
+
+  publish-github-release:
+    docker:
+      - image: cibuilds/github
+    steps:
+      - attach_workspace:
+          at: ~/js-profiler
+      - extract-changelog-version
+      - run:
+          name: publish github release
+          working_directory: ~/js-profiler
+          command: |
+            cp ./js-profiler.tgz ./js-profiler-${VERSION}.tgz
+            CHANGES=$(awk "/## ${VERSION}/,/^$/" CHANGELOG.md)
+            echo "Publishing release v${VERSION} to Github.\nChanges:"
+            echo $CHANGES
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete -n "v${VERSION}" -b "${CHANGES}" "v${VERSION}" ./js-profiler-${VERSION}.tgz
