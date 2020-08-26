@@ -16,7 +16,7 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 * [Installation](#installation)
 * [Updates](#updates)
-  * [v2.3.0: New profile: shallow array copying.](#new-in-v2.3.0)
+  * [v2.3.0: New contributor and profile: shallow array copying.](#new-in-v2.3.0)
   * [v2.2.0: Migrate to Node.js Performance Hooks](#new-in-v2.2.0)
   * [New in version 2 & Migration](#new-in-v2)
     * [Comparison of v1 vs. v2 profile object](#comp-v2-v1-profile)
@@ -47,7 +47,11 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 ### [v2.3.0](https://github.com/haensl/js-profiler/releases/tag/v2.3.0): A new contributor and a new profile: [shallow array copying.](#array-copy)<a name="new-in-v2.3.0"></a>
 
-We are happy to welcome [Josh Howe](https://github.com/joshtch) as a contributor to JS-Profiler! He added a [new profile comparing ways to shallow copy arrays](#array-copy)! Big thank you!
+We are happy to welcome [Josh Howe](https://github.com/joshtch) as a contributor to JS-Profiler! He added a [new profile comparing ways to shallow copy arrays](#array-copy).
+
+##### Big thank you and shout out to [Josh Howe](https://github.com/joshtch)!
+
+Due to updated dependencies, JS-Profiler now requires a minimum Node.js version of 10.12.0.
 
 ### [v2.2.0](https://github.com/haensl/js-profiler/releases/tag/v2.2.0): Migrate to [Node.js Performance Hooks](https://nodejs.org/dist/latest-v12.x/docs/api/perf_hooks.html)<a name="new-in-v2.2.0"></a>
 
