@@ -238,11 +238,12 @@ Profiled operations:
   * `new Array(...a)`
   * `a.concat([])`
   * `[].concat(a)`
-  * `Array.prototype.unshift.apply([], a);`
+  * `Array.prototype.unshift.apply([], a)`
   * `Array.prototype.unshift.apply(new Arrray(), a)`
   * `[].push(...a)`
   * `(new Array()).push(...a)`
   * `b = []; for(...){ b.push(a[i]) }`
+  * `b = new Array(); for(...){ b.push(a[i]) }`
   * `b = new Array(a.length); for(...){ b[i] = a[i] }`
 
 ### [comarison operators](https://js-profiler.com/#comparison-operators)<a name="comparison-operators"></a>
