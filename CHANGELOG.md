@@ -1,3 +1,6 @@
+### 2.3.1
+* [#101: Update dependencies.](https://github.com/haensl/js-profiler/issues/101)
+
 ### 2.3.0
 * [#98: Add profile for shallow array copying.](https://github.com/haensl/js-profiler/issues/98)
 * Automate Github release via CircleCI.
