@@ -113,12 +113,12 @@ jsperformance.run({
 
 Specify the unit to use for time output. Possible values are:
 
-* `auto`  Automatically convert between units where appropriate.
-* `ms`    Milliseconds
-* `µs`    Microseconds
-* `B`     Byte
-* `KB`    Kilobyte
-* `MB`    Megabyte
+* `auto`:  Automatically convert between units where appropriate.
+* `ms` or `milliseconds`:    Milliseconds
+* `µs` or `microseconds`:    Microseconds
+* `B`:     Byte
+* `KB`:    Kilobyte
+* `MB`:    Megabyte
 
 Use the constants found in [units](../lib/support/units/index.js).
 

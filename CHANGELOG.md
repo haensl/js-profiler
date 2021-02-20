@@ -1,3 +1,7 @@
+### 2.4.0
+* [#103: Add aliases for micro- and milliseconds.](https://github.com/haensl/js-profiler/issues/103)
+* Update dependencies.
+
 ### 2.3.1
 * [#101: Update dependencies.](https://github.com/haensl/js-profiler/issues/101)
 

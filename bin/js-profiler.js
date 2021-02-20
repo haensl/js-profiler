@@ -27,7 +27,10 @@ const opts = new GetOpt([
   + '[[OPTIONS]]\n'
 ).bindHelp().parseSystem();
 
-const options = Object.assign({}, DEFAULTS, { console: true });
+const options = {
+  ...DEFAULTS,
+  console: true
+};
 
 if ('quiet' in opts.options) {
   options.verbosity = VERBOSITY.QUIET;
@@ -108,18 +111,21 @@ if ('precision' in opts.options) {
 }
 
 if ('unit' in opts.options) {
-  const units = opts.options.unit.split(',');
-  if (UNITS.isValidTimeUnit(units[0])) {
-    options.units.time = units[0];
+  const [timeUnit, memoryUnit] = opts.options.unit.split(',');
+  if (UNITS.isValidTimeUnit(timeUnit)) {
+    options.units.time = timeUnit;
+    if (UNITS.isAliasForTimeUnit(timeUnit)) {
+      options.units.time = UNITS.getAliasForTimeUnit(timeUnit);
+    }
   } else {
-    log.warn(chalk.yellow(`WARNING: "${units[0]}" is not a valid time unit. Defaulting to ${options.units.time}.`));
+    log.warn(chalk.yellow(`WARNING: "${timeUnit}" is not a valid time unit. Defaulting to ${options.units.time}.`));
   }
 
-  if (units.length > 1) {
-    if (UNITS.isValidMemoryUnit(units[1])) {
-      options.units.memory = units[1];
+  if (memoryUnit) {
+    if (UNITS.isValidMemoryUnit(memoryUnit)) {
+      options.units.memory = memoryUnit;
     } else {
-      log.warn(chalk.yellow(`WARNING: "${units[1]}" is not a valid memory unit. Defaulting to ${options.units.memory}.`));
+      log.warn(chalk.yellow(`WARNING: "${memoryUnit}" is not a valid memory unit. Defaulting to ${options.units.memory}.`));
     }
   }
 }
