@@ -1,3 +1,6 @@
+### 2.4.1
+* [#103: Translate long form time units in library.](https://github.com/haensl/js-profiler/issues/103)
+
 ### 2.4.0
 * [#103: Add aliases for micro- and milliseconds.](https://github.com/haensl/js-profiler/issues/103)
 * Update dependencies.
