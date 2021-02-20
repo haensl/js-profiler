@@ -40,8 +40,8 @@ Options:
   Specify the unit for time output. Default: auto,auto.
     Possible values:
       auto (automatically convert between milli- and microseconds)
-      ms (milliseconds)
-      µs (microseconds)
+      ms|milliseconds (milliseconds)
+      µs|microseconds (microseconds)
       B (bytes)
       KB (kilobytes)
       MB (megabytes)
@@ -149,12 +149,12 @@ js-profiler --unit=ms,KB # time milliseconds, memory: kilobyte
 
 available units:
 
-* auto (automatically convert between milli- and microseconds)
-* ms (milliseconds)
-* µs (microseconds)
-* B (bytes)
-* KB (kilobytes)
-* MB (megabytes)
+* `auto`: automatically convert between milli- and microseconds
+* `ms` or `milliseconds`: milliseconds
+* `µs` or `microseconds`: microseconds
+* `B`: bytes
+* `KB`: kilobytes
+* `MB`: megabytes
 
 ### Verbosity
 
