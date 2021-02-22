@@ -1,3 +1,7 @@
+### 2.4.2
+* [#106: Add options to JSON result.](https://github.com/haensl/js-profiler/issues/106)
+* Update dependencies.
+
 ### 2.4.1
 * [#103: Translate long form time units in library.](https://github.com/haensl/js-profiler/issues/103)
 
