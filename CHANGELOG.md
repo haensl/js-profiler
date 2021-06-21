@@ -1,3 +1,7 @@
+### 2.4.0
+* [#108: Add destructuring profile.](https://github.com/haensl/js-profiler/issues/108)
+* Update dependencies.
+
 ### 2.3.1
 * [#101: Update dependencies.](https://github.com/haensl/js-profiler/issues/101)
 
