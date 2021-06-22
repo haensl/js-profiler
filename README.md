@@ -29,6 +29,7 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
   * [array concatenation](#array-concat)
   * [array copying](#array-copy)
   * [comparison operators](#comparison-operators)
+  * [(de-)composition](#composition)
   * [guards](#guards)
   * [loops](#loops)
   * [map access](#map:access)
@@ -245,6 +246,22 @@ Profiled operations:
   * `b = []; for(...){ b.push(a[i]) }`
   * `b = new Array(); for(...){ b.push(a[i]) }`
   * `b = new Array(a.length); for(...){ b[i] = a[i] }`
+
+### [(de-)composition](https://js-profiler.com/#de-composition)<a name="composition"></a>
+(De-)Composition: composing objects, arrays and variables from each other.
+
+Profiled operations:
+  * `const { a, b } = obj`
+  * `const { a = i } = obj`
+  * `const [a, b] = arr`
+  * `const [a = i, b] = d`
+  * `const [a, b, ...tail] = d`
+  * `const a = arr[i]`
+  * `const a = arr[i] || j`
+  * `const a = obj.b`
+  * `const a = obj.b || i`
+  * `const [a, b] = [b, a]`
+  * `const c = b; b = a; a = c`
 
 ### [comarison operators](https://js-profiler.com/#comparison-operators)<a name="comparison-operators"></a>
 Variable comparison operators.
