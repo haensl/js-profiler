@@ -46,6 +46,8 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 
 ## Updates<a name="updates"></a>
 
+### [v2.5.0](https://github.com/haensl/js-profiler/releases/tag/v2.5.0): New profile: [(de-)composition.](#composition)<a name="new-in-v2.5.0"></a>
+
 ### [v2.3.0](https://github.com/haensl/js-profiler/releases/tag/v2.3.0): A new contributor and a new profile: [shallow array copying.](#array-copy)<a name="new-in-v2.3.0"></a>
 
 We are happy to welcome [Josh Howe](https://github.com/joshtch) as a contributor to JS-Profiler! He added a [new profile comparing ways to shallow copy arrays](#array-copy).
