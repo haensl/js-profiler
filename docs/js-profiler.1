@@ -1,5 +1,5 @@
 ." vim: set syn=nroff
-.TH js-profiler 1 "August 2020" "js-profiler v2.4.0"
+.TH js-profiler 1 "June 2021" "js-profiler v2.5.0"
 
 .SH NAME
 js-profiler - A JavaScript profiling tool and collection of profiling modules and benchmarks.
@@ -69,10 +69,10 @@ Available units:
 .RS
 .IP auto .2i
 automatically convert between milli- and microseconds. DEFAULT
-.IP ms
-milliseconds
-.IP \[u03BC]s
-microseconds. ATTENTION: the first letter is an actual mu.
+.IP ms|milliseconds
+milliseconds. Both the shorthand 'ms' and the long form 'milliseconds' are recognized.
+.IP \[u03BC]s|microseconds
+microseconds. Both the shorthand '\[u03BC]s' and the long form 'microseconds' are recognized.
 .IP B
 .br
 Byte

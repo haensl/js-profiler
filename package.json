@@ -1,6 +1,6 @@
 {
   "name": "js-profiler",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "lib/index.js",
   "man": "./docs/js-profiler.1.gz",
@@ -18,9 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm test",
-      "pre-push": "npm run lint && npm test",
-      "post-pull": "npm install"
+      "pre-commit": "npm run lint && npm test"
     }
   },
   "keywords": [
@@ -77,5 +75,5 @@
   "bugs": {
     "url": "https://github.com/haensl/js-profiler/issues"
   },
-  "homepage": "https://github.com/haensl/js-profiler#readme"
+  "homepage": "https://js-profiler.com"
 }
