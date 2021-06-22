@@ -29,6 +29,7 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
   * [array concatenation](#array-concat)
   * [array copying](#array-copy)
   * [comparison operators](#comparison-operators)
+  * [(de-)composition](#composition)
   * [guards](#guards)
   * [loops](#loops)
   * [map access](#map:access)
@@ -44,6 +45,8 @@ JS-Profiler powers [https://js-profiler.com](https://js-profiler.com).
 `npm i [-gS] js-profiler`
 
 ## Updates<a name="updates"></a>
+
+### [v2.5.0](https://github.com/haensl/js-profiler/releases/tag/v2.5.0): New profile: [(de-)composition.](#composition)<a name="new-in-v2.5.0"></a>
 
 ### [v2.3.0](https://github.com/haensl/js-profiler/releases/tag/v2.3.0): A new contributor and a new profile: [shallow array copying.](#array-copy)<a name="new-in-v2.3.0"></a>
 
@@ -245,6 +248,22 @@ Profiled operations:
   * `b = []; for(...){ b.push(a[i]) }`
   * `b = new Array(); for(...){ b.push(a[i]) }`
   * `b = new Array(a.length); for(...){ b[i] = a[i] }`
+
+### [(de-)composition](https://js-profiler.com/#de-composition)<a name="composition"></a>
+(De-)Composition: composing objects, arrays and variables from each other.
+
+Profiled operations:
+  * `const { a, b } = obj`
+  * `const { a = i } = obj`
+  * `const [a, b] = arr`
+  * `const [a = i, b] = d`
+  * `const [a, b, ...tail] = d`
+  * `const a = arr[i]`
+  * `const a = arr[i] || j`
+  * `const a = obj.b`
+  * `const a = obj.b || i`
+  * `const [a, b] = [b, a]`
+  * `const c = b; b = a; a = c`
 
 ### [comarison operators](https://js-profiler.com/#comparison-operators)<a name="comparison-operators"></a>
 Variable comparison operators.

@@ -1,3 +1,6 @@
+### 2.5.0
+* [#108: Add destructuring profile.](https://github.com/haensl/js-profiler/issues/108)
+
 ### 2.4.2
 * [#106: Add options to JSON result.](https://github.com/haensl/js-profiler/issues/106)
 * Update dependencies.
