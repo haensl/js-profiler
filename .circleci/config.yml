@@ -135,7 +135,7 @@ workflows:
           # at this point in time because config templates
           # are pre-compiled. See
           # https://discuss.circleci.com/t/how-to-use-a-bash-env-variable-as-a-parameter-to-a-command-or-when-condition/29186
-          node_version: 12
+          node_version: 12.22.9
       - bundle:
           requires:
             - lint
@@ -148,7 +148,7 @@ workflows:
             - bundle
       - bundle-test-cjs-js:
           name: bundle-test-cjs-js@engine
-          node_version: 12
+          node_version: 12.22.9
           requires:
             - bundle
       - ensure-versioned-correctly:
@@ -169,7 +169,7 @@ workflows:
             - publish
       - package-test-cjs-js:
           name: package-test-cjs-js@engine
-          node_version: 12
+          node_version: 12.22.9
           requires:
             - publish
       - publish-github-release:

@@ -1,6 +1,6 @@
 ### 2.5.3
 * [#114: Update dependencies.](https://github.com/haensl/js-profiler/issues/114)
-* Lift required Node.js version from 10.12.0 to 12.x.y to since maintenance has run out.
+* Lift required Node.js version from 10.12.0 to 12.22.9 to since maintenance has run out.
 
 ### 2.5.2
 * [#112: Update dependencies.](https://github.com/haensl/js-profiler/issues/112)
