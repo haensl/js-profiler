@@ -1,6 +1,6 @@
 {
   "name": "js-profiler",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "lib/index.js",
   "man": "./docs/js-profiler.1.gz",
@@ -10,16 +10,12 @@
   "scripts": {
     "start": "node bin/js-profiler.js",
     "manpage": "gzip -c docs/js-profiler.1 > docs/js-profiler.1.gz",
+    "prepare": "if [ ${NODE_ENV} != 'production' ]; then husky install; fi",
     "test": "mocha --recursive \"./{,!(node_modules)/**/}*.test.js\"",
     "tdd": "mocha --recursive --watch \"./{,!(node_modules)/**/}*.test.js\"",
     "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml \"./{,!(node_modules)/**/}*.test.js\"",
     "lint": "eslint -c ./.eslintrc.json lib/**/*.js",
     "lint:ci": "eslint -c .eslintrc.json --format junit -o test-results/eslint/results.xml lib/**/*.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm test"
-    }
   },
   "keywords": [
     "Performance",
@@ -59,7 +55,7 @@
     "@haensl/eslint-config": "^1.3.0",
     "chai": "^4.2.0",
     "eslint": "^8.2.0",
-    "husky": "^4.3.0",
+    "husky": "^7.0.4",
     "mocha": "^9.0.3",
     "mocha-junit-reporter": "^2.0.0",
     "sinon": "^12.0.1",

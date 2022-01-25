@@ -1,3 +1,6 @@
+### 2.5.3
+* [#114: Update dependencies.](https://github.com/haensl/js-profiler/issues/114)
+
 ### 2.5.2
 * [#112: Update dependencies.](https://github.com/haensl/js-profiler/issues/112)
 
