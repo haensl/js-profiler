@@ -1,6 +1,6 @@
 {
   "name": "js-profiler",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "Javascript profiling tool and collection of performance profiles for various JavaScript built-ins.",
   "main": "lib/index.js",
   "man": "./docs/js-profiler.1.gz",
@@ -44,6 +44,7 @@
       "url": "https://github.com/joshtch"
     }
   ],
+  "funding": "https://github.com/sponsors/haensl",
   "license": "MIT",
   "dependencies": {
     "@haensl/log": "^1.2.2",
@@ -58,7 +59,7 @@
     "husky": "^7.0.4",
     "mocha": "^9.0.3",
     "mocha-junit-reporter": "^2.0.0",
-    "sinon": "^12.0.1",
+    "sinon": "^13.0.1",
     "sinon-chai": "^3.5.0"
   },
   "engines": {
