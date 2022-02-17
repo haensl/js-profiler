@@ -1,3 +1,7 @@
+### 2.5.4
+* [#116: Add funding information.](https://github.com/haensl/js-profiler/issues/116)
+* Update dependencies.
+
 ### 2.5.3
 * [#114: Update dependencies.](https://github.com/haensl/js-profiler/issues/114)
 * Lift required Node.js version from 10.12.0 to 12.22.7 to since maintenance has run out.
