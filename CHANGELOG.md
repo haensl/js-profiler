@@ -1,3 +1,6 @@
+### 2.5.5
+* [#118: Update dependencies.](https://github.com/haensl/js-profiler/issues/118)
+
 ### 2.5.4
 * [#116: Add funding information.](https://github.com/haensl/js-profiler/issues/116)
 * Update dependencies.
