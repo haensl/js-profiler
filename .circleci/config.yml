@@ -259,8 +259,6 @@ jobs:
           name: test global cli
           command: |
             js-profiler -h
-      - package-information
-
 
   ensure-versioned-correctly:
     docker:
