@@ -63,7 +63,7 @@
     "sinon-chai": "^3.5.0"
   },
   "engines": {
-    "node": ">= 14.17.0"
+    "node": ">= 18.18.0"
   },
   "repository": {
     "type": "git",
