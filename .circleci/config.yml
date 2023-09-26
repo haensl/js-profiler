@@ -63,14 +63,14 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - js-profiler-dependencies-{{ checksum "package.json" }}
+            - js-profiler-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: install dependencies
           command: npm install
       - save_cache:
           paths:
             - node_modules
-          key: js-profiler-dependencies-{{ checksum "package.json" }}
+          key: js-profiler-dependencies-{{ checksum "package-lock.json" }}
       - extract-versions
 
 
@@ -106,19 +106,6 @@ commands:
           command: |
             npm i -S js-profiler@${VERSION}
             sudo npm i -g js-profiler@${VERSION}
-
-  package-information:
-    steps:
-      - run:
-          name: install tree
-          command: sudo apt-get -y install tree
-      - run:
-          name: gather bundle information
-          command: |
-            npm info js-profiler@${VERSION} > ./bundle.info
-            tree -s node_modules/js-profiler >> ./bundle.info
-      - store_artifacts:
-          path: bundle.info
 
 workflows:
   version: 2
@@ -180,7 +167,7 @@ workflows:
 jobs:
   extract-versions:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - init
@@ -188,7 +175,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - init
@@ -208,7 +195,7 @@ jobs:
         type: string
         default: lts
     docker:
-      - image: circleci/node:<< parameters.node_version >>
+      - image: cimg/node:<< parameters.node_version >>
     working_directory: ~/js-profiler
     steps:
       - init
@@ -221,7 +208,7 @@ jobs:
 
   bundle:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - init
@@ -258,7 +245,7 @@ jobs:
         type: string
         default: lts
     docker:
-      - image: circleci/node:<< parameters.node_version >>
+      - image: cimg/node:<< parameters.node_version >>
     working_directory: /tmp/test-app
     steps:
       - init
@@ -277,7 +264,7 @@ jobs:
 
   ensure-versioned-correctly:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - attach_workspace:
@@ -312,7 +299,7 @@ jobs:
 
   publish:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - attach_workspace:
@@ -331,7 +318,7 @@ jobs:
         type: string
         default: lts
     docker:
-      - image: circleci/node:<< parameters.node_version >>
+      - image: cimg/node:<< parameters.node_version >>
     working_directory: /tmp/test-app
     steps:
       - init
@@ -345,7 +332,6 @@ jobs:
           name: test global cli
           command: |
             js-profiler -h
-      - package-information
 
   publish-github-release:
     docker:
