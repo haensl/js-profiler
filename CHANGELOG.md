@@ -1,3 +1,7 @@
+### 2.5.7
+* [#124: Update dependencies.](https://github.com/haensl/js-profiler/issues/124)
+* Lift minimum Node.js from 14.17.0 to 18.18.0 since maintenance is running out.
+
 ### 2.5.6
 * [#121: Update dependencies.](https://github.com/haensl/js-profiler/issues/121)
 * Lift minimum Node.js from 12.22.7 to 14.17.0 since maintenance has run out.

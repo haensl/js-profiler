@@ -63,14 +63,14 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - js-profiler-dependencies-{{ checksum "package.json" }}
+            - js-profiler-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: install dependencies
           command: npm install
       - save_cache:
           paths:
             - node_modules
-          key: js-profiler-dependencies-{{ checksum "package.json" }}
+          key: js-profiler-dependencies-{{ checksum "package-lock.json" }}
       - extract-versions
 
 
@@ -107,19 +107,6 @@ commands:
             npm i -S js-profiler@${VERSION}
             sudo npm i -g js-profiler@${VERSION}
 
-  package-information:
-    steps:
-      - run:
-          name: install tree
-          command: sudo apt-get -y install tree
-      - run:
-          name: gather bundle information
-          command: |
-            npm info js-profiler@${VERSION} > ./bundle.info
-            tree -s node_modules/js-profiler >> ./bundle.info
-      - store_artifacts:
-          path: bundle.info
-
 workflows:
   version: 2
   default:
@@ -135,7 +122,7 @@ workflows:
           # at this point in time because config templates
           # are pre-compiled. See
           # https://discuss.circleci.com/t/how-to-use-a-bash-env-variable-as-a-parameter-to-a-command-or-when-condition/29186
-          node_version: 14.17.0
+          node_version: 18.18.0
       - bundle:
           requires:
             - lint
@@ -148,7 +135,7 @@ workflows:
             - bundle
       - bundle-test-cjs-js:
           name: bundle-test-cjs-js@engine
-          node_version: 14.17.0
+          node_version: 18.18.0
           requires:
             - bundle
       - ensure-versioned-correctly:
@@ -169,7 +156,7 @@ workflows:
             - publish
       - package-test-cjs-js:
           name: package-test-cjs-js@engine
-          node_version: 14.17.0
+          node_version: 18.18.0
           requires:
             - publish
       - publish-github-release:
@@ -180,7 +167,7 @@ workflows:
 jobs:
   extract-versions:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - init
@@ -188,7 +175,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - init
@@ -208,7 +195,7 @@ jobs:
         type: string
         default: lts
     docker:
-      - image: circleci/node:<< parameters.node_version >>
+      - image: cimg/node:<< parameters.node_version >>
     working_directory: ~/js-profiler
     steps:
       - init
@@ -221,7 +208,7 @@ jobs:
 
   bundle:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - init
@@ -258,7 +245,7 @@ jobs:
         type: string
         default: lts
     docker:
-      - image: circleci/node:<< parameters.node_version >>
+      - image: cimg/node:<< parameters.node_version >>
     working_directory: /tmp/test-app
     steps:
       - init
@@ -272,12 +259,10 @@ jobs:
           name: test global cli
           command: |
             js-profiler -h
-      - package-information
-
 
   ensure-versioned-correctly:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - attach_workspace:
@@ -312,7 +297,7 @@ jobs:
 
   publish:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/js-profiler
     steps:
       - attach_workspace:
@@ -331,7 +316,7 @@ jobs:
         type: string
         default: lts
     docker:
-      - image: circleci/node:<< parameters.node_version >>
+      - image: cimg/node:<< parameters.node_version >>
     working_directory: /tmp/test-app
     steps:
       - init
@@ -345,7 +330,6 @@ jobs:
           name: test global cli
           command: |
             js-profiler -h
-      - package-information
 
   publish-github-release:
     docker:
